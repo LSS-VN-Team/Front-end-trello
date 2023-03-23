@@ -2,15 +2,19 @@ import { useRef, useState } from "react"
 import { BsThreeDots } from "react-icons/bs"
 const imageTheme = [
     {
+        id: 1,
         url: "https://images.unsplash.com/photo-1679041006302-cf5e318da08c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjc5NDYzMTMz&ixlib=rb-4.0.3&q=80&w=400"
     },
     {
+        id: 2,
         url: "https://images.unsplash.com/photo-1679214523859-c78a0bea016d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDJ8MzE3MDk5fHx8fHwyfHwxNjc5NDYzMTMz&ixlib=rb-4.0.3&q=80&w=400"
     },
     {
+        id: 3,
         url: "https://images.unsplash.com/photo-1679245883026-adea0f43e6f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDN8MzE3MDk5fHx8fHwyfHwxNjc5NDYzMTMz&ixlib=rb-4.0.3&q=80&w=400"
     },
     {
+        id: 4,
         url: "https://images.unsplash.com/photo-1678938940744-0fc1c7953b2b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDR8MzE3MDk5fHx8fHwyfHwxNjc5NDYzMTMz&ixlib=rb-4.0.3&q=80&w=400"
     }
 ]
@@ -34,9 +38,13 @@ const colorTheme = [
 export interface FormAddProps { }
 export default function FormAdd(props: FormAddProps) {
     const [inputValue, setInputValue] = useState("")
+    const [backgroundUrl, setBackgroundUrl] = useState("https://images.unsplash.com/photo-1679041006302-cf5e318da08c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjc5NDYzMTMz&ixlib=rb-4.0.3&q=80&w=400")
     const buttonRef = useRef(null)
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
+    }
+    const handleImageClick = (url: string) => {
+        setBackgroundUrl(url);
     }
     return (
         <div>
@@ -44,16 +52,19 @@ export default function FormAdd(props: FormAddProps) {
                 <div className="px-4 py-2">
                     <div className="border-b pb-2 mb-2">
                         <p className="text-center text-sm text-gray-500 ">Tạo bảng</p>
-                        {/* <AiOutlineClose className=""/> */}
                     </div>
-                    <div className="flex mb-3 justify-center bg-[url('https://images.unsplash.com/photo-1679041006302-cf5e318da08c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjc5NDYzMTMz&ixlib=rb-4.0.3&q=80&w=400')] py-2">
+                    <div className={`flex mb-3 justify-center bg-[url('${backgroundUrl}')] py-2`}>
                         <img className="" src="https://a.trellocdn.com/prgb/assets/14cda5dc635d1f13bc48.svg" alt="" />
                     </div>
                     <p className="text-xs text-gray-500 font-bold">Phông nền</p>
                     <div className="flex items-center mb-1">
                         {imageTheme.map((item) => (
-                            <button className="p-1  ">
-                                <img className="h-10 w-16 rounded-lg cursor-pointer hover:bg-gray-400" src={item.url} alt="" />
+                            <button className="p-1" key={item.id} onClick={() => handleImageClick(item.url)}>
+                                <img
+                                    className="h-10 w-16 rounded-lg cursor-pointer hover:bg-gray-400"
+                                    src={item.url}
+                                    alt=""
+                                />
                             </button>
                         ))}
                     </div>
@@ -79,9 +90,10 @@ export default function FormAdd(props: FormAddProps) {
                         ref={buttonRef}
                         disabled={!inputValue.trim()}
                         className={`w-full mb-2 bg-colorrightbtn text-gray-500 text-sm p-1 rounded-sm ${inputValue.trim() ? 'bg-navbar text-white' : ''}`}>
-                            Tạo mới
+                        Tạo mới
                     </button>
-                    <button className="w-full bg-colorrightbtn text-gray-500 text-sm p-1 rounded-sm">Bắt đầu với mẫu</button>
+                    <button className="w-full bg-colorrightbtn text-gray-500 text-sm p-1 rounded-sm hover:bg-colorrightbtnhover">Bắt đầu với mẫu</button>
+                    <p className="text-xs text-gray-500">Bằng cách sử dụng hình ảnh từ Unsplash, bạn đồng ý với <u><a href="#"> giấy phép</a> </u> và <u><a href="#">Điều khoản dịch vụ</a></u></p>
                 </div>
             </form>
         </div>

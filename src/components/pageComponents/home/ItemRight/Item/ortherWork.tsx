@@ -26,7 +26,7 @@ export default function OtherWork(props: OtherWorkProps) {
                 {board.slice().reverse().map((item) => (
                     <div className='mr-3'>
                         <p className='absolute text-white text-base font-bold p-2'>{item.title}</p>
-                        <img className='w-48 h-24 rounded-sm' src={item.ulr} alt="" />
+                        <img className='w-48 h-24 rounded-sm cursor-pointer' src={item.ulr} alt="" />
                     </div>
                 ))}
             </div>

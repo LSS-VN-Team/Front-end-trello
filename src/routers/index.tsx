@@ -5,8 +5,8 @@ import PrivateRoute from "./privateRoute";
 import HomePage from "pages/home";
 import LoginPage from "pages/login";
 import NotFoundPage from "pages/notFound";
-// import RegisterPage from "pages/register";
 import RegisterComponent from "components/pageComponents/register";
+import TaskCardComponent from "components/pageComponents/taskCard";
 
 const Router: FC = () => {
   return (
@@ -17,6 +17,7 @@ const Router: FC = () => {
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />
       <Route path="*" element={<NotFoundPage />} />
       <Route path={ROUTES.REGISTER } element={<RegisterComponent />} />
+      <Route path={ROUTES.TASKCARDPAGE } element={<TaskCardComponent />} />
     </Routes>
   );
 };

@@ -5,7 +5,6 @@ import { ILogin} from "interfaces";
 import { LoginState, UserResponse } from "./interface";
 
 
-
 const initialState: LoginState = {
   isLoading: false,
   error: "",
@@ -22,12 +21,15 @@ const initialState: LoginState = {
     token: ""
   },
 };
-const token = localStorage.getItem("token")
 
 export const loginSlice = createSlice({
   name: "login",
   initialState,
   reducers: {
+    // setToken: (state, action: PayloadAction<string>) => {
+    //   state.info.token = action.payload;
+    //   localStorage.setItem("token", action.payload);
+    // },
     loginHome: (state, action: PayloadAction<ILogin>) => {
       state.isLoading = true;
     },
@@ -67,6 +69,7 @@ export const {
   loginHomeSuccess,
   loginHomeFailure,
   logoutPage,
+  // setToken
 } = loginSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type

@@ -24,6 +24,7 @@ function* handleRegister() {
           type: registerHomeSuccess.type,
           payload: response.data.data,
         });
+        
       } else {
         yield put({
           type: registerHomeFailure.type,

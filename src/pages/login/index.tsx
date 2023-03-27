@@ -1,19 +1,11 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "app/hooks";
+import { loginHome } from "features/login/loginSlide";
 import { useNavigate } from "react-router-dom";
-import {
-  loginHome,
-  loginHomeFailure,
-  loginHomeSuccess,
-  selectAgentInfor,
-  selectIsLoggedIn,
-  selectIsLoading
-} from "features/login/loginSlide";
 
 interface LoginPageProps {}
 export default function LoginPage(props: LoginPageProps) {
   const dispatch = useAppDispatch();
-  const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -35,17 +27,11 @@ export default function LoginPage(props: LoginPageProps) {
     const ID = {
       email: email,
       password: password,
+      Navigate: navigate,
     };
-    console.log(ID);
 
     if (isFormValid) {
-      dispatch(loginHome(ID));
-      if (isLoggedIn === true) {
-        // console.log('dang nhap thanh cong');
-        navigate('/home');
-      } else {
-        console.log('dang nhap that bai');
-      }
+      dispatch( loginHome(ID));
     }
   };
   return (
@@ -79,10 +65,12 @@ export default function LoginPage(props: LoginPageProps) {
                 className="h-10 w-80 rounded pl-2 border-2 mt-6 border-slate-200 focus:outline-lime-600"
                 placeholder="Enter password"
               />
-              <button className={`h-10 w-80 bg-lime-600 mt-6 text-white rounded font-bold${
-                !isFormValid ? "opacity-90 cursor-not-allowed" : ""
-              }`}
-              disabled={!isFormValid}>
+              <button
+                className={`h-10 w-80 bg-lime-600 mt-6 text-white rounded font-bold${
+                  !isFormValid ? "opacity-90 cursor-not-allowed" : ""
+                }`}
+                disabled={!isFormValid}
+              >
                 Continue
               </button>
             </form>

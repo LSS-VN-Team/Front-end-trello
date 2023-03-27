@@ -1,9 +1,15 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useAppSelector } from "app/hooks";
+import { useNavigate } from "react-router-dom";
+
 import {
   registerHome,
   registerHomeFailure,
+  registerHomeSuccess,
+  selectIsRegistered
 } from "features/register/registerSlide";
+import { Navigate } from "react-router-dom";
 
 export interface RegisterPageProps {}
 export default function RegisterPage(props: RegisterPageProps) {
@@ -11,6 +17,9 @@ export default function RegisterPage(props: RegisterPageProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const isRegistered = useAppSelector(selectIsRegistered);
+  const navigate = useNavigate();
+
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -37,8 +46,11 @@ export default function RegisterPage(props: RegisterPageProps) {
     console.log(IDR);
     if (isFormValid) {
       dispatch(registerHome(IDR));
+      if (isRegistered === true ){
+        navigate('/login');
+      } else navigate('/register')
     } else {
-      dispatch(registerHomeFailure);
+      // dispatch(registerHomeFailure);
     }
   };
 

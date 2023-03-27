@@ -4,12 +4,12 @@ module.exports = {
   theme: {
     extend: {
       width: {
-        sidebar: "26%",
-        viewpost: "33%",
-        rightitem: "29%",
+        taskCardW: "777px",
       },
       height: {
-        sigup: "550px"
+        sigup: "550px",
+        taskCardH: "999px"
+
       },
     },
   },

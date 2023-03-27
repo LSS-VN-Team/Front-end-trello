@@ -13,21 +13,43 @@ module.exports = {
         textcolor: "rgba(9, 30, 66, 0.66)",
         colorrightbtn: "#091e420a",
         colorrightbtnhover: "#091e4214",
-        upbtnicon:"#89609E",
+        upbtnicon: "#89609E",
         upbtn: "#EDDBF4",
-        upbtnhover:"#DFC0EB",
+        upbtnhover: "#DFC0EB",
+        rolehover: "#E4F0F6",
+        rolecolor: " #172b4d",
+        sidebarhover: "hsla(0, 0%, 100%, 0.16)",
+        sidebarfocus: "#FFFFFF",
+        buttontask: "#DFE1E6",
+        card: "#ebecf0",
+        cardbtn: "#091e4214",
+        submitadd: "#0079bf",
+      },
+      spacing: {
+        sidebar: "212%",
       },
       width: {
         homeitemleft: "14.3%",
+        sidebar: "13.545%",
+        taskboard: "86.455%",
+        
+        card: "260px",
+      },
+      height: {
+        sidebar: "",
       },
       boxShadow: {
+        inputsd: "0 1px 0 #091e4240",
         boxsd: "0 0 10px 2px rgb(0 0 0 / 0.1)",
       },
-      gridTemplateColumns: { 
-        '16': '12px 1fr 12px',
+      gridTemplateColumns: {
+        16: "12px 1fr 12px",
       },
       margin: {
-        '84': '362px',
+        84: "362px",
+      },
+      borderWidth: {
+        0.5: "0.1px",
       },
     },
   },

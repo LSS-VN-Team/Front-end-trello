@@ -1,10 +1,7 @@
 import { AiOutlineClockCircle} from 'react-icons/ai'
 export interface LastViewProps { }
 const board = [
-    {
-        title: "Trello Project Board",
-        ulr: "https://images.unsplash.com/photo-1679041006302-cf5e318da08c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8MXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
-    },
+    
     {
         title: "test",
         ulr: "https://images.unsplash.com/photo-1679214523859-c78a0bea016d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8N3x8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"

@@ -23,10 +23,10 @@ const BoardContainer = () => {
     return (
         <div className='w-taskboard'>
             <Header />
-            <div className='flex '>
-                <div className='  flex mr-1'>
+            <div className='flex'>
+                <div className='flex mr-1'>
                     {listItem.map(item => (
-                        <div>
+                        <div className='ml-3'>
                             <div className='mr-1 bg-card rounded-sm'>
                                 <Board key={item.key} typeBoard={item.key} title={item.title} />
                             </div>

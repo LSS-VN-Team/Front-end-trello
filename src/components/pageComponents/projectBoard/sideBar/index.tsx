@@ -23,9 +23,9 @@ const itemtSidebar = [
 ]
 export default function SideBar() {
     return (
-        <div className='h-sidebar w-sidebar'>
-            <div className=" backdrop-blur-lg border-0.5 border-[hsla(0,0%,100%,0.16)] flex flex-col items-center space-y-sidebar">
-                <div>
+        <div className=' w-sidebar '>
+            <div className=" h-full  backdrop-blur-lg border-0.5 border-[hsla(0,0%,100%,0.16)] flex flex-col items-center justify-between">
+                <div >
                     <div className="py-4 flex items-center border-b border-[hsla(0,0%,100%,0.16)] text-white">
                         <div className=' px-2.5 rounded-sm bg-icoinT mr-4 ml-2'><p className='text-lg font-bold text-white'>T</p></div>
                         <div>

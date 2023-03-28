@@ -36,7 +36,8 @@ module.exports = {
         card: "260px",
       },
       height: {
-        sidebar: "",
+        navbar: "5%",
+        sidebar: "95%",
       },
       boxShadow: {
         inputsd: "0 1px 0 #091e4240",
@@ -51,6 +52,9 @@ module.exports = {
       borderWidth: {
         0.5: "0.1px",
       },
+      borderRadius:{
+        "df":"4px"
+      }
     },
   },
   plugins: [],

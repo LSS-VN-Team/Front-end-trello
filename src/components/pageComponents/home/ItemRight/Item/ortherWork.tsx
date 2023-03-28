@@ -2,7 +2,7 @@ import { BiHelpCircle } from 'react-icons/bi'
 import { FiUsers } from 'react-icons/fi'
 export interface OtherWorkProps { }
 const board = [
-   
+
     {
         title: "test",
         ulr: "https://images.unsplash.com/photo-1679214523859-c78a0bea016d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8N3x8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
@@ -23,11 +23,11 @@ export default function OtherWork(props: OtherWorkProps) {
                 {board.slice().reverse().map((item) => (
                     <div className='mr-3'>
                         <p className='absolute text-white text-base font-bold p-2'>{item.title}</p>
-                        <img className='w-48 h-24 rounded-sm cursor-pointer' src={item.ulr} alt="" />
+                        <img className='w-48 h-24 rounded-df cursor-pointer' src={item.ulr} alt="" />
                     </div>
                 ))}
             </div>
-            <div className='p-1.5 text-gray-500 text-sm bg-colorrightbtn hover:bg-colorrightbtnhover w-3/12 flex items-end mt-10'>
+            <div className='p-1.5 text-gray-500 text-sm bg-colorrightbtn hover:bg-colorrightbtnhover w-3/12 flex items-end mt-10 cursor-pointer'>
                 <p className='text-center w-full'>Xem tất cả bảng đã đóng</p>
             </div>
         </div>

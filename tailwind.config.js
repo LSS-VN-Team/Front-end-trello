@@ -32,12 +32,14 @@ module.exports = {
         homeitemleft: "14.3%",
         sidebar: "13.545%",
         taskboard: "86.455%",
-        
+        taskCardW: "777px",
         card: "260px",
       },
       height: {
         navbar: "5%",
         sidebar: "95%",
+        sigup: "550px",
+        taskCardH: "999px"
       },
       boxShadow: {
         inputsd: "0 1px 0 #091e4240",

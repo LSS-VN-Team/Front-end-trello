@@ -5,6 +5,11 @@ export interface ILogin {
   password: string;
   Navigate: NavigateFunction;
 }
+export interface Board {
+  name: string;
+  admin: string;
+}
+
 export interface IRegister {
   email: string;
   password: string;

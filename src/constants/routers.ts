@@ -1,6 +1,7 @@
 export const ROUTES = {
-  HOMEPAGE: '/',
-  LOGIN:'login',
+  HOMEPAGE: "/",
+  LOGIN: "login",
+  BOARD: "board",
   REGISTER: 'register',
   TASKCARDPAGE: 'task-card',
 };

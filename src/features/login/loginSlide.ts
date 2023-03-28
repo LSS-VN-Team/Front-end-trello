@@ -5,6 +5,7 @@ import { ILogin } from "interfaces";
 import { LoginState, UserResponse } from "./interface";
 import { IRegister } from "interfaces";
 
+
 const initialState: LoginState = {
   isLoading: false,
   error: "",
@@ -21,6 +22,7 @@ const initialState: LoginState = {
     token: "",
   },
 };
+const token = localStorage.getItem("token")
 
 export const loginSlice = createSlice({
   name: "login",

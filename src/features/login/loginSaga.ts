@@ -1,10 +1,13 @@
-// import { Navigate } from 'react-router-dom';
 import { PayloadAction } from "@reduxjs/toolkit";
+import { ILogin} from "interfaces";
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
 import factories from "./factories";
-import { loginHome, loginHomeFailure, loginHomeSuccess } from "./loginSlide";
-import { ILogin } from "interfaces";
 
+import {
+  loginHome,
+  loginHomeFailure,
+  loginHomeSuccess,
+} from "./loginSlide";
 function* handleLogin() {
   yield takeEvery(loginHome.type, function* (payload: PayloadAction<ILogin>) {
     try {
@@ -34,12 +37,14 @@ function* handleLogin() {
     } catch (error) {
       yield put({
         type: loginHomeFailure.type,
-        error,
+        // error
       });
     }
   });
 }
 
-export default function* loginSaga() {
-  yield all([fork(handleLogin)]);
+export default function* rootSaga() {
+  yield all([
+    fork(handleLogin),
+  ]);
 }

@@ -1,25 +1,18 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch } from "app/hooks";
 import { useAppSelector } from "app/hooks";
 import { useNavigate } from "react-router-dom";
-
-import {
-  registerHome,
-  registerHomeFailure,
-  registerHomeSuccess,
-  selectIsRegistered
-} from "features/register/registerSlide";
-import { Navigate } from "react-router-dom";
+import { registerHome, selectIsLoggedIn } from "features/login/loginSlide";
+import { Link } from "react-router-dom";
 
 export interface RegisterPageProps {}
 export default function RegisterPage(props: RegisterPageProps) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const isRegistered = useAppSelector(selectIsRegistered);
+  const isRegistered = useAppSelector(selectIsLoggedIn);
   const navigate = useNavigate();
-
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -43,14 +36,12 @@ export default function RegisterPage(props: RegisterPageProps) {
       password: password,
       name: name,
     };
-    console.log(IDR);
     if (isFormValid) {
       dispatch(registerHome(IDR));
-      if (isRegistered === true ){
-        navigate('/login');
-      } else navigate('/register')
+      if (isRegistered === true) {
+        navigate("/login");
+      } else navigate("/register");
     } else {
-      // dispatch(registerHomeFailure);
     }
   };
 
@@ -113,9 +104,7 @@ export default function RegisterPage(props: RegisterPageProps) {
               <br />
 
               <div className="hover:underline text-sm text-blue-500 mt-3">
-                <a href="/login" className="">
-                  Already have an account? Log In
-                </a>
+                <Link to="/login">Already have an account? Log In</Link>
               </div>
             </div>
           </div>

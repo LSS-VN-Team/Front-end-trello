@@ -1,9 +1,6 @@
 import axios from "axios";
-import { ILogin } from "interfaces";
-export interface Login{
-  email:string,
-  password:string
-}
+import { Login } from "./interface";
+
 const url = process.env.REACT_APP_BACKEND_URL;
 const factories = {
   requestLogin: (data: Login) => {

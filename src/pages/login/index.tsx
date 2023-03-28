@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { loginHome } from "features/login/loginSlide";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 interface LoginPageProps {}
 export default function LoginPage(props: LoginPageProps) {
@@ -31,7 +31,7 @@ export default function LoginPage(props: LoginPageProps) {
     };
 
     if (isFormValid) {
-      dispatch( loginHome(ID));
+      dispatch(loginHome(ID));
     }
   };
   return (
@@ -76,12 +76,12 @@ export default function LoginPage(props: LoginPageProps) {
             </form>
             <br />
             <div className=" text-sm text-blue-500 mt-16">
-              <a href="" className="hover:underline">
+              <Link to="" className="hover:underline">
                 Can't log in?
-              </a>
-              <a href="/register" className="hover:underline ml-2">
+              </Link>
+              <Link to="/register" className="hover:underline ml-2">
                 Sign up for an account{" "}
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,5 +1,3 @@
-
-
 export interface UserResponse {
   _id: string;
   firstName: string;
@@ -16,4 +14,9 @@ export interface LoginState {
   isLoading: boolean;
   error: string;
   isLoggedIn: boolean;
+}
+
+export interface Login{
+  email:string,
+  password:string
 }

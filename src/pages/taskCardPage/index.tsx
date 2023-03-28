@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { IoIosArrowBack } from 'react-icons/io';
 
 export interface TaskCardPageProps {}
 export default function TaskCardPage(props: TaskCardPageProps) {
@@ -17,7 +18,7 @@ export default function TaskCardPage(props: TaskCardPageProps) {
             </div>
             <div className="h-full w-1/6 ">
               <a href="" className="">
-                <i className="fa-solid fa-xmark text-white text-xl mt-2 bg-slate-100 bg-opacity-40 hover:bg-slate-100 hover:bg-opacity-60 h-9 w-9 ml-20 rounded-full p-1 pl-3 "></i>
+              <IoIosArrowBack className="text-xl mt-2 bg-slate-100 bg-opacity-40 hover:bg-slate-100 hover:bg-opacity-60 h-9 w-9 ml-20 rounded-full p-1 pl-1"/>
               </a>
               <span>
                 <button className="h-9 w-20 rounded bg-slate-100 bg-opacity-60 hover:bg-slate-100 hover:bg-opacity-80 mt-14 ml-10">

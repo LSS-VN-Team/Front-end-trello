@@ -1,8 +1,9 @@
-import { Navigate } from 'react-router-dom';
+import { NavigateFunction } from 'react-router-dom';
+
 export interface ILogin {
   email: string;
   password: string;
-  Navigate: any;
+  Navigate: NavigateFunction;
 }
 export interface IRegister {
   email: string;

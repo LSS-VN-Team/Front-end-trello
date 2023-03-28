@@ -1,9 +1,9 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "app/store";
-import { ILogin} from "interfaces";
+import { ILogin } from "interfaces";
 import { LoginState, UserResponse } from "./interface";
-
+import { IRegister } from "interfaces";
 
 
 const initialState: LoginState = {
@@ -19,7 +19,7 @@ const initialState: LoginState = {
     status: "inactive",
     createdAt: new Date(),
     updatedAt: new Date(),
-    token: ""
+    token: "",
   },
 };
 const token = localStorage.getItem("token")
@@ -42,7 +42,7 @@ export const loginSlice = createSlice({
       state.error = action.payload;
       state.isLoggedIn = false;
     },
-    logoutPage:(state, action: PayloadAction)=>{
+    logoutPage: (state, action: PayloadAction) => {
       state.isLoading = false;
       state.error = "";
       state.isLoggedIn = false;
@@ -55,21 +55,48 @@ export const loginSlice = createSlice({
         status: "inactive",
         createdAt: new Date(),
         updatedAt: new Date(),
-        token: ""
+        token: "",
       };
     },
-    
+  },
+});
+
+export const registerSlice = createSlice({
+  name: "register",
+  initialState,
+  reducers: {
+    registerHome: (state, action: PayloadAction<IRegister>) => {
+      state.isLoading = true;
+    },
+    registerHomeSuccess: (state, action: PayloadAction<UserResponse>) => {
+      state.isLoading = false;
+      state.error = "";
+      state.isLoggedIn = true;
+      state.info = action.payload;
+    },
+    registerHomeFailure: (state, action: PayloadAction<string>) => {
+      state.isLoading = false;
+      state.error = action.payload;
+      state.isLoggedIn = false;
+    },
+    resetRegisterState: (state) => {
+      state.isLoading = false;
+      state.error = "";
+      state.isLoggedIn = false;
+    },
   },
 });
 
 export const {
-  loginHome,
-  loginHomeSuccess,
-  loginHomeFailure,
-  logoutPage,
-} = loginSlice.actions;
+  registerHome,
+  registerHomeSuccess,
+  registerHomeFailure,
+  resetRegisterState,
+} = registerSlice.actions;
 
-// Other code such as selectors can use the imported `RootState` type
+export const { loginHome, loginHomeSuccess, loginHomeFailure, logoutPage } =
+  loginSlice.actions;
+
 export const selectIsLoading = (state: RootState) => state.login.isLoading;
 export const selectError = (state: RootState) => state.login.error;
 export const selectAgentInfor = (state: RootState) => state.login.info;

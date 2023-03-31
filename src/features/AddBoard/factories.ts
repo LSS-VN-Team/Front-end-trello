@@ -1,20 +1,31 @@
-import axios from "axios";
 import { Board } from "interfaces";
 import { axiosRequest } from "utils/axiosRequest";
-const url = process.env.REACT_APP_BACKEND_URL;
 const factories = {
-  getPost: (data: Board) => {
-    return axios({
+  getBoard: (data: Board) => {
+    return axiosRequest({
       method: "get",
-      url: `${url}posts?page=1&limit=20`,
+      url: `board/get?admin=642260a6ffcdae8bbb7b9cff&page=1&limit=20`,
       data: data,
     });
   },
-  addPost: (data: Board) => {
+  addBoard: (data: Board) => {
     return axiosRequest({
       method: "post",
-      url: `/posts/Create`,
+      url: `/board`,
       data: data,
+    });
+  },
+   editBoard: (data: Board) => {
+    return axiosRequest({
+      method: "put",
+      url: `/board/getbyid/${data._id}`,
+      data: data,
+    });
+  },
+  removeBoard: (id: string) => {
+    return axiosRequest({
+      method: "delete",
+      url: `/board/${id}`,
     });
   },
 };

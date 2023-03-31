@@ -33,7 +33,7 @@ export default function HomeItemRight(props: HomeItemRightProps) {
             <div className=' my-1 mt-16'>
                 <p className='text-LG font-bold text-gray-500'>CÁC KHÔNG GIAN LÀM VIỆC CỦA BẠN</p>
             </div>
-            <div className=' my-1 mt-4 flex items-center'>
+            <div className=' my-1 mt-4 flex items-center flex-wrap'>
                 <div className='flex items-center'>
                     <div className=' px-2.5 rounded-sm bg-icoinT mr-2'><p className='text-lg font-bold text-white'>T</p></div>
                     <p className='text-base font-bold text-gray-600 '>Trello không gian làm việc</p>

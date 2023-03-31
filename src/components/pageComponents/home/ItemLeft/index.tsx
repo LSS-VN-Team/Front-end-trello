@@ -57,7 +57,7 @@ const ItemLeftBot = [
 ]
 export default function HomeItemLeft(props: HomeItemLeftProps) {
   return (
-    <div className="mt-7 w-homeitemleft mr-6">
+    <div className="mt-7 w-homeitemleft mr-6 max-xl:w-1/2">
       <div className='border-b'>
         {ItemLeft.map((item) => (
           <div className="flex items-center my-1 p-2 rounded-sm hover:bg-homeitemlefthover cursor-pointer ">

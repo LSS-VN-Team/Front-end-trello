@@ -21,9 +21,9 @@ const BoardContainer = () => {
     const [showBoardForm, setShowBoardForm] = useState(false)
     const formRef = useRef<HTMLDivElement>(null);
     return (
-        <div className='w-taskboard'>
+        <div className='w-taskboard overflow-x-auto'>
             <Header />
-            <div className='flex'>
+            <div className='flex '>
                 <div className='flex mr-1'>
                     {listItem.map(item => (
                         <div className='ml-3'>

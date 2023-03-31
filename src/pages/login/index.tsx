@@ -32,7 +32,7 @@ export default function LoginPage(props: LoginPageProps) {
 
     if (isFormValid) {
       dispatch(loginHome(ID));
-    }
+    } 
   };
   return (
     <div>

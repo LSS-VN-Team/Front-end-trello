@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import TaskForm from './taskForm';
-import { AiOutlinePlus } from 'react-icons/ai'
+// import { AiOutlinePlus } from 'react-icons/ai'
 import { BsPencil, BsThreeDots } from 'react-icons/bs'
 import { HiPlusSm, HiOutlineTemplate } from 'react-icons/hi'
-import { GrFormClose } from 'react-icons/gr'
+// import { GrFormClose } from 'react-icons/gr'
 
 
 
@@ -41,27 +41,27 @@ const Board: React.FC<BoardProps> = ({ title, typeBoard }) => {
         setTasks([...tasks, task]);
         setShowTaskForm(false);
     };
-    const deleteTask = (index: number) => {
-        const newTasks = [...tasks];
-        newTasks.splice(index, 1);
-        setTasks(newTasks);
-    };
+    // const deleteTask = (index: number) => {
+    //     const newTasks = [...tasks];
+    //     newTasks.splice(index, 1);
+    //     setTasks(newTasks);
+    // };
 
 
-    const changeTask = (index: number, newTask: string | null) => {
-        if (!newTask) return;
+    // const changeTask = (index: number, newTask: string | null) => {
+    //     if (!newTask) return;
 
-        const newTasks = [...tasks];
-        newTasks[index] = newTask;
-        setTasks(newTasks);
-    };
-
-
+    //     const newTasks = [...tasks];
+    //     newTasks[index] = newTask;
+    //     setTasks(newTasks);
+    // };
 
 
-    const handleFormCancel = () => {
-        setShowTaskForm(false);
-    }
+
+
+    // const handleFormCancel = () => {
+    //     setShowTaskForm(false);
+    // }
 
     return (
         <div className='w-card p-2'>
@@ -69,7 +69,7 @@ const Board: React.FC<BoardProps> = ({ title, typeBoard }) => {
                 <div className='flex items-center justify-between'>
                     <p className={typeBoard}>{title}</p>
                     <div className='p-1 rounded-sm hover:bg-cardbtn'><BsThreeDots /></div>
-                    </div>
+                </div>
                 <div className="list">
                     {tasks.map((task, index) => (
                         <div className='my-1 p-1 bg-white shadow-inputsd rounded-sm'>

@@ -4,8 +4,8 @@ import { BiChevronDown, BiRocket, BiFilter } from 'react-icons/bi'
 import { HiOutlineViewBoards } from 'react-icons/hi'
 export default function Header() {
     return (
-        <div className='flex justify-between '>
-            <div className='flex items-center p-3'>
+        <div className='flex justify-between flex-wrap'>
+            <div className='flex items-center p-3 flex-wrap'>
                 <p className="text-lg text-white font-bold pr-2">test</p>
                 <div className='text-xl text-white p-1.5 rounded-sm bg-sidebarhover hover:text-yellow-500'>
                     <AiOutlineStar className='' />
@@ -24,9 +24,7 @@ export default function Header() {
                     <div className=''><BiChevronDown /></div>
                 </div>
             </div>
-            <div className='flex items-center p-3'>
-
-
+            <div className='flex items-center p-3 flex-wrap'>
                 <div className='flex item-center text-xl text-white p-1.5 rounded-sm bg-sidebarhover hover:bg-buttonnavhover ml-2 cursor-pointer'>
                     <div className='mr-1'><BiRocket /></div>
                     <p className='text-sm'>Tiện ích bổ sung</p>

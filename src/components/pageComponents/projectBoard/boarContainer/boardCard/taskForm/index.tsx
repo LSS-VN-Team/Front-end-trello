@@ -1,23 +1,17 @@
 import React, { useState, useRef, FormEvent } from 'react';
 import { BsThreeDots } from 'react-icons/bs';
 import { GrFormClose } from "react-icons/gr"
-import { AiOutlineSearch } from 'react-icons/ai';
 interface TaskFormProps {
     onSubmit: (inputValue: string) => void;
 }
-
 const TaskForm: React.FC<TaskFormProps> = ({ onSubmit }) => {
     const [inputValue, setInputValue] = useState<string>('');
-    const [error, setError] = useState<string>('');
     const inputRef = useRef<HTMLInputElement>(null);
-
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!inputValue) {
-            setError('Please enter a value');
             return;
         }
-        setError('');
         onSubmit(inputValue);
         setInputValue('');
     };

@@ -29,11 +29,14 @@ module.exports = {
         sidebar: "212%",
       },
       width: {
-        homeitemleft: "14.3%",
+        
+        // homeitemleft: "40%",
+        // homeitemright: "60%",
         sidebar: "13.545%",
         taskboard: "86.455%",
         taskCardW: "777px",
         card: "260px",
+        wmd:"100rem"
       },
       height: {
         navbar: "5%",

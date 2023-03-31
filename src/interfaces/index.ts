@@ -6,10 +6,16 @@ export interface ILogin {
   Navigate: NavigateFunction;
 }
 export interface Board {
+  _id?:string;
   name: string;
   admin: string;
 }
 
+export interface ResponseData {
+  totalPage: number;
+  currentPage: number;
+  data: Board[];
+}
 export interface IRegister {
   email: string;
   password: string;

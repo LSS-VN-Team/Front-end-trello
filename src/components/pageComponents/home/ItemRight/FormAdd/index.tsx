@@ -3,6 +3,8 @@ import { useRef, useState } from "react"
 import { BsThreeDots, BsPerson } from "react-icons/bs"
 import { BiLock } from 'react-icons/bi'
 import { GiEarthAmerica } from 'react-icons/gi'
+import { useDispatch } from "react-redux"
+import { addBoard, addBoardSuccess } from "features/AddBoard/addboardSlide"
 const imageTheme = [
     {
         url: "https://images.unsplash.com/photo-1679041006302-cf5e318da08c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjc5NDYzMTMz&ixlib=rb-4.0.3&q=80&w=400"
@@ -40,13 +42,25 @@ export default function FormAdd(props: FormAddProps) {
     const [privacy, setPrivacy] = useState('Không gian làm việc');
     // const [backgroundUrl, setBackgroundUrl] = useState("https://images.unsplash.com/photo-1679041006302-cf5e318da08c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjc5NDYzMTMz&ixlib=rb-4.0.3&q=80&w=400")
     const buttonRef = useRef(null)
-
+    const dispatch = useDispatch()
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
+
     }
     const handleClick = (newPrivacy: any) => {
         setPrivacy(newPrivacy);
     }
+    const handleBoard = () => {
+        const newBoard = {
+            admin: "642260a6ffcdae8bbb7b9cff",
+            name: inputValue,
+        }
+        dispatch(addBoard(newBoard))
+       
+        setInputValue("")
+
+    }
+
     return (
         <div>
             <form onSubmit={(e) => e.preventDefault()} >
@@ -121,6 +135,7 @@ export default function FormAdd(props: FormAddProps) {
                         </div>
                     </Tippy>
                     <button
+                        onClick={handleBoard}
                         ref={buttonRef}
                         disabled={!inputValue.trim()}
                         className={`w-full mb-2 bg-colorrightbtn text-gray-500 text-sm p-1 rounded-sm ${inputValue.trim() ? 'bg-navbar text-white' : ''}`}>

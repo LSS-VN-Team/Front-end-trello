@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import boardReducer from 'features/AddBoard/addboardSlide'
+import boardsReducer from 'features/AddBoard/addboardSlide'
 import loginReducer from 'features/login/loginSlide';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './rootSaga';

@@ -22,9 +22,11 @@ const initialState: LoginState = {
     token: "",
   },
 };
-const token = localStorage.getItem("token")
+const token = localStorage.getItem("token");
+
 
 export const loginSlice = createSlice({
+  
   name: "login",
   initialState,
   reducers: {
@@ -36,6 +38,8 @@ export const loginSlice = createSlice({
       state.error = "";
       state.isLoggedIn = true;
       state.info = action.payload;
+      console.log(token);
+      
     },
     loginHomeFailure: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
@@ -97,6 +101,7 @@ export const {
 
 export const { loginHome, loginHomeSuccess, loginHomeFailure, logoutPage } =
   loginSlice.actions;
+
 
 export const selectIsLoading = (state: RootState) => state.login.isLoading;
 export const selectError = (state: RootState) => state.login.error;

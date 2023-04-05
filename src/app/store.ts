@@ -3,12 +3,14 @@ import boardsReducer from 'features/AddBoard/addboardSlide'
 import loginReducer from 'features/login/loginSlide';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './rootSaga';
+import taskCardReducer from 'features/taskCard/taskCardSlide'
 
 const sagaMiddleware = createSagaMiddleware()
 export const store = configureStore({
   reducer: {
     login:loginReducer,
-    board: boardsReducer
+    board: boardsReducer,
+    taskCard: taskCardReducer,
   },
   middleware: (getDefaultMiddleware) =>
   getDefaultMiddleware({

@@ -23,7 +23,6 @@ function* handleLogin() {
           payload: response.data.data,
         });
       } else {
-        alert("dang nhap that bai");
         yield put({
           type: loginHomeFailure.type,
           payload: response.data.message,
@@ -38,6 +37,6 @@ function* handleLogin() {
   });
 }
 
-export default function* rootSaga() {
+export default function* loginSaga() {
   yield all([fork(handleLogin)]);
 }

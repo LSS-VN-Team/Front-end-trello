@@ -1,7 +1,7 @@
 import { TaskCard } from "interfaces";
-import { PayloadAction } from "@reduxjs/toolkit";
+
 import { call, put, takeLatest } from "redux-saga/effects";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, Draft } from "@reduxjs/toolkit";
 import { RootState } from "app/store";
 
 interface CardState {
@@ -25,14 +25,25 @@ export const taskCardSlide = createSlice({
     },
     getTaskCardsSuccess: (state, action) => {
       state.status = "succeeded";
-      state.cards = action.payload;
+      state.cards = action.payload;      
     },
     getTaskCardsFailFure: (state, action: PayloadAction<string>) => {
       state.status = "failed";
       state.error = action.payload;
     },
-    addTaskCard: (state, action: PayloadAction<TaskCard>) => {
+    addTaskCard: (state: Draft<CardState>, action: PayloadAction<TaskCard>) => {
+      state.status = "loading";
+    },
+    addTaskCardSuccess: (state: Draft<CardState>, action: PayloadAction<TaskCard>) => {
+      state.status = "succeeded";
       state.cards.push(action.payload);
+    },
+    addTaskCardFailure: (
+      state: Draft<CardState>,
+      action: PayloadAction<string>
+    ) => {
+      state.status = "failed";
+      state.error = action.payload;
     },
     updateTaskCard: (state, action: PayloadAction<TaskCard>) => {
       const { _id } = action.payload;
@@ -43,7 +54,13 @@ export const taskCardSlide = createSlice({
     },
     deleteTaskCard: (state, action: PayloadAction<string | undefined>) => {
       state.cards = state.cards.filter((card) => card._id !== action.payload);
-    },    
+      console.log("deleSlide");
+      console.log(
+        (state.cards = state.cards.filter(
+          (card) => card._id !== action.payload
+        ))
+      );
+    },
   },
 });
 
@@ -52,26 +69,12 @@ export const {
   getTaskCardsSuccess,
   getTaskCardsFailFure,
   addTaskCard,
+  addTaskCardSuccess,
+  addTaskCardFailure,
   updateTaskCard,
   deleteTaskCard,
 } = taskCardSlide.actions;
 
-// export const selectIsLoading = (state: RootState) =>
-//   state.taskCardSlide.isLoading;
-// export const selectTaskCards = (state: RootState) =>
-//   state.taskCardSlide.taskCards;
-
-// export function* handleGetTaskCards() {
-//   try {
-//     const taskCards: TaskCard[] = yield call(fetchTasks);
-//     yield put(getTaskCardsSuccess(taskCards));
-//   } catch (error) {
-//     yield put(getTaskCardsFailure(error.message));
-//   }
-// }
-
-// export function* watchGetTaskCards() {
-//   yield takeLatest(getTaskCards.type, handleGetTaskCards);
-// }
+export const selectAllCard = (state: RootState) => state.taskCard.cards;
 
 export default taskCardSlide.reducer;

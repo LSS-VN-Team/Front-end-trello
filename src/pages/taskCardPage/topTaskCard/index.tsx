@@ -16,7 +16,10 @@ export default function TaskCardPage(props: TaskCardPageProps) {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (coverRef.current && !coverRef.current.contains(event.target as Node)) {
+      if (
+        coverRef.current &&
+        !coverRef.current.contains(event.target as Node)
+      ) {
         setShowTooltip(false);
       }
     };
@@ -47,8 +50,6 @@ export default function TaskCardPage(props: TaskCardPageProps) {
             visible={showTooltip}
             placement="bottom"
             animation="shift-away"
-            duration={200}
-            offset={[0, 100]}
             theme="material"
           >
             <button

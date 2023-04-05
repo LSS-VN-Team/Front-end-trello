@@ -15,11 +15,11 @@ const Router: FC = () => {
       <Route element={<PrivateRoute />}>
         <Route path={ROUTES.HOMEPAGE} element={<HomePage />} />
         <Route path={ROUTES.BOARD} element={<ProjectBoard />} />
+        <Route path={ROUTES.TASKCARDPAGE} element={<TaskCardComponent />} />
       </Route>
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />
       <Route path="*" element={<NotFoundPage />} />
-      <Route path={ROUTES.REGISTER } element={<RegisterPage />} />
-      <Route path={ROUTES.TASKCARDPAGE } element={<TaskCardComponent />} />
+      <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
     </Routes>
   );
 };

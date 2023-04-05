@@ -14,7 +14,7 @@ function* handleLogin() {
         })
       );
       if (response.data.data.success) {
-        const token = response.data.data.data.access_token;
+        const token = response.data.data.data.token;
         localStorage.setItem("token", token);
         payload.payload.Navigate("/");
         alert("dang nhap thanh cong");
@@ -37,6 +37,6 @@ function* handleLogin() {
   });
 }
 
-export default function* rootSaga() {
+export default function* loginSaga() {
   yield all([fork(handleLogin)]);
 }

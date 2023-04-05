@@ -1,19 +1,21 @@
 import axios from "axios";
 import { TaskCard } from "interfaces";
+import { axiosRequest } from "utils/axiosRequest";
 
 const url = process.env.REACT_APP_BACKEND_URL;
 const factories = {
   fetchTasks: () => {
-    return axios({
+    return axiosRequest({
       method: "get",
-      url: `${url}TaskCard`,
+      url: `TaskCard`,
     });
   },
   createTask: (data: TaskCard) => {
-    return axios({
+    return axiosRequest({
       method: "post",
-      url: `${url}TaskCard`,
+      url: `TaskCard`,
       data: data,
+      
     });
   },
   updateTask: (data: TaskCard) => {

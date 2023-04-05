@@ -24,6 +24,6 @@ export interface IRegister {
 
 export interface TaskCard {
   _id?: string;
-  title: string;
-  description: string;
+  name: string;
+  BoardId?: string;
 }

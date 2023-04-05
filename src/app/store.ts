@@ -9,7 +9,7 @@ const sagaMiddleware = createSagaMiddleware()
 export const store = configureStore({
   reducer: {
     login:loginReducer,
-    board: boardReducer,
+    board: boardsReducer,
     taskCard: taskCardReducer,
   },
   middleware: (getDefaultMiddleware) =>

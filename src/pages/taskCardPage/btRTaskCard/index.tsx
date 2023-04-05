@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-
+import { deleteTaskCard, selectAllCard } from "features/taskCar/taskCardSlide";
 import { CiUser } from "react-icons/ci";
 import { BsTag, BsCheck2Square, BsClock, BsArchive } from "react-icons/bs";
 import { HiOutlinePaperClip } from "react-icons/hi";
@@ -11,6 +11,8 @@ import {
 } from "react-icons/ai";
 import { MdOutlineContentCopy } from "react-icons/md";
 import { VscNotebookTemplate } from "react-icons/vsc";
+import { log } from "console";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 
 const iconBR = [
   {
@@ -87,6 +89,16 @@ const iconBR = [
 
 export interface BTRTaskCardPageProps {}
 export default function BTRTaskCardPage(props: BTRTaskCardPageProps) {
+  const dispatch = useAppDispatch();
+  const card = useAppSelector(selectAllCard)
+  const handleArchiveClick = (cardId: string) => {
+    const btn1 = "user13";
+    const item = iconBR.find((item) => item.key === btn1);
+    if (item) {
+      dispatch(deleteTaskCard(cardId));
+    }
+  };
+
   return (
     <>
       <div className="h-full w-1/4 bg-gray-50-300">
@@ -101,7 +113,10 @@ export default function BTRTaskCardPage(props: BTRTaskCardPageProps) {
                 : ""
             }`}
           >
-            <button className="h-8 w-5/6 bg-slate-200 hover:bg-slate-300 font-light flex mx-4 mt-1.5 pl-2 text-sm items-center rounded-sm">
+            <button
+              onClick={() => handleArchiveClick('card')}
+              className="h-8 w-5/6 bg-slate-200 hover:bg-slate-300 font-light flex mx-4 mt-1.5 pl-2 text-sm items-center rounded-sm"
+            >
               {item.icon}
               <p className="ml-3">{item.title}</p>
             </button>

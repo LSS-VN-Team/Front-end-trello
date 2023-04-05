@@ -4,8 +4,7 @@ import { Navigate, Outlet } from "react-router-dom";
 export interface PrivateRouteProps {}
 
 export default function PrivateRoute(props: PrivateRouteProps) {
-  // check if user logged in
-  const isAuth = true;
+  const token = localStorage.getItem("token");
 
-  return isAuth ? <Outlet /> : <Navigate to={ROUTES.LOGIN} />;
+  return token ? <Outlet /> : <Navigate to={ROUTES.LOGIN} />;
 }

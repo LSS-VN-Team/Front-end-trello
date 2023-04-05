@@ -42,7 +42,7 @@ module.exports = {
         navbar: "5%",
         sidebar: "95%",
         sigup: "550px",
-        taskCardH: "999px"
+        taskCardH: "990px"
       },
       boxShadow: {
         inputsd: "0 1px 0 #091e4240",

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { loginHome } from "features/login/loginSlide";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, Navigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { ROUTES } from "constants/routers";
 
 interface LoginPageProps {}
 export default function LoginPage(props: LoginPageProps) {
@@ -9,6 +11,11 @@ export default function LoginPage(props: LoginPageProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    return <Navigate to={ROUTES.HOMEPAGE} />;
+  }
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);

@@ -21,3 +21,9 @@ export interface IRegister {
   password: string;
   name: string;
 }
+
+export interface TaskCard {
+  _id?: string;
+  name: string;
+  BoardId?: string;
+}

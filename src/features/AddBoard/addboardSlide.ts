@@ -6,14 +6,12 @@ interface BoardState {
   boards: Board[];
   status: "nothing" | "loading" | "succeeded" | "failed";
   error: string | null;
-  boardSelected:Board | null
 }
 
 const initialState: BoardState = {
   boards: [],
   status: "nothing",
   error: null,
-  boardSelected: null
 };
 
 export const boardSlice = createSlice({
@@ -32,7 +30,7 @@ export const boardSlice = createSlice({
       state.error = action.payload;
     },
     addBoard: (state: Draft<BoardState>, action: PayloadAction<Board>) => {
-      state.status = "loading";
+      state.status = "loading";      
     },
     addBoardSuccess: (state: Draft<BoardState>, action: PayloadAction<Board>) => {
       state.status = "succeeded";
@@ -45,49 +43,7 @@ export const boardSlice = createSlice({
       state.status = "failed";
       state.error = action.payload;
     },
-    editBoard: (state: Draft<BoardState>, action: PayloadAction<Board>) => {
-      state.status = "loading";
-    },
-    editBoardSuccess: (state: Draft<BoardState>, action: PayloadAction<Board>) => {
-      state.status = "succeeded";
-      const editedBoard = action.payload;
-      const existingBoard = state.boards.find(
-        (board) => board._id === editedBoard._id
-      );
-      if (existingBoard) {
-        Object.assign(existingBoard, editedBoard);
-      }
-    },
-    editBoardFailure: (
-      state: Draft<BoardState>,
-      action: PayloadAction<string>
-    ) => {
-      state.status = "failed";
-      state.error = action.payload;
-    },
-    removeBoard: (state: Draft<BoardState>, action: PayloadAction<string>) => {
-      state.status = "loading";
-    },
-    removeBoardSuccess: (
-      state: Draft<BoardState>,
-      action: PayloadAction<any>
-    ) => {
-      state.status = "succeeded";
-      const removeBoardId = action.payload;
-      state.boards = [
-        ...state.boards.filter((board) => board._id !== removeBoardId._id),
-      ];
-    },
-    removeBoardFailure: (
-      state: Draft<BoardState>,
-      action: PayloadAction<string>
-    ) => {
-      state.status = "failed";
-      state.error = action.payload;
-    },
-    boardSeleted:(state: Draft<BoardState>, action: PayloadAction<Board>) => {
-      state.boardSelected = action.payload
-    },
+    
   },
 });
 
@@ -98,13 +54,6 @@ export const {
   addBoard,
   addBoardFailure,
   addBoardSuccess,
-  boardSeleted,
-  editBoard,
-  editBoardSuccess,
-  editBoardFailure,
-  removeBoard,
-  removeBoardSuccess,
-  removeBoardFailure,
 } = boardSlice.actions;
 
 export const selectAllBoards = (state: RootState) => state.board.boards;

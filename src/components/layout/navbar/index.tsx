@@ -5,6 +5,8 @@ import { BsChevronDown, BsChevronRight } from "react-icons/bs";
 import { TbBellRinging2 } from "react-icons/tb"
 import "./style.css";
 import Tippy from "@tippyjs/react/headless";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutPage } from "features/login/loginSlide";
 
 interface NavBarProps { }
 
@@ -30,6 +32,11 @@ const ItemsNavbar = [
 export default function NavBar(props: NavBarProps) {
     const navbarRef = useRef<HTMLDivElement>(null);
     const [isBoardPage, setIsBoardPage] = useState(false);
+    const dispatch = useDispatch()
+    const handleclickLogout = () => {
+        dispatch(logoutPage())
+    }
+    
 
     useEffect(() => {
         setIsBoardPage(window.location.pathname === "/board");
@@ -103,7 +110,7 @@ export default function NavBar(props: NavBarProps) {
                     <p className="px-2 text-white text-sm">Tạo mới</p>
                 </button>
                 <button className="mx-3 flex items-center p-2 lg:hidden 2xl:hidden hover:bg-buttonnavhover rounded-sm bg-buttonnav">
-                    <AiOutlinePlus className="text-white"/>
+                    <AiOutlinePlus className="text-white" />
                 </button>
             </div>
             <div className="flex item-center">
@@ -114,7 +121,22 @@ export default function NavBar(props: NavBarProps) {
                 <div className="flex items-center max-md:ml-5">
                     <div className={`p-1.5 rounded-full hover:bg-hover cursor-pointer   ${isBoardPage ? "hover:bg-zinc-600" : ""}`}><TbBellRinging2 className=" text-white text-xl " /></div>
                     <div className={`p-1.5 rounded-full hover:bg-hover cursor-pointer max-md:hidden ${isBoardPage ? "hover:bg-zinc-600" : ""}`}><AiOutlineQuestionCircle className=" text-white text-xl" /></div>
-                    <div className={`p-1.5 rounded-full hover:bg-hover cursor-pointer  ${isBoardPage ? "hover:bg-zinc-600" : ""}`}><img className="rounded-full mx-1 w-6 h-6 " src="https://trello-members.s3.amazonaws.com/64190d6836236e371c566da7/bc6393e9d68b04800fc5ef1e1ee97d43/30.png" alt="" /></div>
+                    <Tippy
+                        placement="bottom"
+                        trigger="click"
+                        interactive
+                        render={attrs => (
+                            <div className=' w-64 bg-white h-[300px] rounded-sm shadow-boxsd ' tabIndex={-1} {...attrs}>
+                                <div className="flex items-center cursor-pointer" onClick={handleclickLogout}>
+                                    <button className="w-full">đăng xuất</button>
+                                </div>
+                            </div>
+                        )}
+                    >
+                        <div className={`p-1.5 rounded-full hover:bg-hover cursor-pointer  ${isBoardPage ? "hover:bg-zinc-600" : ""}`}>
+                            <img className="rounded-full mx-1 w-6 h-6 " src="https://trello-members.s3.amazonaws.com/64190d6836236e371c566da7/bc6393e9d68b04800fc5ef1e1ee97d43/30.png" alt="" />
+                        </div>
+                    </Tippy>
                 </div>
             </div>
         </div>

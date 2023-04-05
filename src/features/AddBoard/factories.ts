@@ -4,7 +4,7 @@ const factories = {
   getBoard: (data: Board) => {
     return axiosRequest({
       method: "get",
-      url: `board/get?admin=642260a6ffcdae8bbb7b9cff&page=1&limit=20`,
+      url: `board/get?page=1&limit=20`,
       data: data,
     });
   },

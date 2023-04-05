@@ -1,13 +1,9 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { ILogin} from "interfaces";
+import { ILogin } from "interfaces";
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
 import factories from "./factories";
 
-import {
-  loginHome,
-  loginHomeFailure,
-  loginHomeSuccess,
-} from "./loginSlide";
+import { loginHome, loginHomeFailure, loginHomeSuccess } from "./loginSlide";
 function* handleLogin() {
   yield takeEvery(loginHome.type, function* (payload: PayloadAction<ILogin>) {
     try {
@@ -15,11 +11,10 @@ function* handleLogin() {
         factories.requestLogin({
           email: payload.payload.email,
           password: payload.payload.password,
-
         })
       );
       if (response.data.data.success) {
-        const token = response.data.data.data.access_token;
+        const token = response.data.data.data.token;
         localStorage.setItem("token", token);
         payload.payload.Navigate("/");
         alert("dang nhap thanh cong");
@@ -44,7 +39,5 @@ function* handleLogin() {
 }
 
 export default function* rootSaga() {
-  yield all([
-    fork(handleLogin),
-  ]);
+  yield all([fork(handleLogin)]);
 }

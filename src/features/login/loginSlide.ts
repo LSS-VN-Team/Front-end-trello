@@ -57,6 +57,7 @@ export const loginSlice = createSlice({
         updatedAt: new Date(),
         token: "",
       };
+      localStorage.removeItem("token")
     },
   },
 });

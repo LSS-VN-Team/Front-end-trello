@@ -52,7 +52,6 @@ export default function FormAdd(props: FormAddProps) {
     }
     const handleBoard = () => {
         const newBoard = {
-            admin: "642260a6ffcdae8bbb7b9cff",
             name: inputValue,
         }
         dispatch(addBoard(newBoard))

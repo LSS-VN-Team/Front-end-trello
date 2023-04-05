@@ -8,7 +8,7 @@ export interface ILogin {
 export interface Board {
   _id?:string;
   name: string;
-  admin: string;
+  
 }
 
 export interface ResponseData {

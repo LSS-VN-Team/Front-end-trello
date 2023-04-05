@@ -55,7 +55,6 @@ function* handleUpdateTaskCard(action: PayloadAction<TaskCard>) {
         );
         yield put(updateTaskCard(response.data));
       } catch (error) {
-        console.log("Update TaskCard error: ");
       }
     }
   );
@@ -68,9 +67,7 @@ function* handleDeleteTaskCard() {
       try {
         yield call(() => factories.deleteTask(payload.payload));
         yield put(deleteTaskCard(payload.payload));
-        console.log("deleteSaga");
       } catch (error) {
-        console.log("Delete TaskCard error");
       }
     }
   );
@@ -78,6 +75,9 @@ function* handleDeleteTaskCard() {
 
 
 export default function* taskCardSaga() {
-  yield fork(handleDeleteTaskCard);
-  yield fork(handleAddTaskCard);
+  yield all([
+    fork(handleGetTaskCards),
+    fork(handleAddTaskCard),
+    fork(handleDeleteTaskCard)
+  ]);
 }

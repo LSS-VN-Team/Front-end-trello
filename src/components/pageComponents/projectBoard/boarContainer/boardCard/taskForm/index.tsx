@@ -3,7 +3,7 @@ import React, { useState, useRef, FormEvent } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { GrFormClose } from "react-icons/gr";
 import { TaskCard } from "interfaces";
-import { addTaskCard, selectAllCard } from "features/taskCar/taskCardSlide";
+import { addTaskCard, selectAllCard } from "features/taskCard/taskCardSlide";
 interface TaskFormProps {
   onSubmit: (inputValue: string) => void;
 }

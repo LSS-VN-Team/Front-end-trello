@@ -54,12 +54,6 @@ export const taskCardSlide = createSlice({
     },
     deleteTaskCard: (state, action: PayloadAction<string | undefined>) => {
       state.cards = state.cards.filter((card) => card._id !== action.payload);
-      console.log("deleSlide");
-      console.log(
-        (state.cards = state.cards.filter(
-          (card) => card._id !== action.payload
-        ))
-      );
     },
   },
 });

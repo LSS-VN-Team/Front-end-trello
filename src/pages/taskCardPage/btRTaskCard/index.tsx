@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { deleteTaskCard, selectAllCard } from "features/taskCar/taskCardSlide";
+import { deleteTaskCard, selectAllCard } from "features/taskCard/taskCardSlide";
 import { CiUser } from "react-icons/ci";
 import { BsTag, BsCheck2Square, BsClock, BsArchive } from "react-icons/bs";
 import { HiOutlinePaperClip } from "react-icons/hi";

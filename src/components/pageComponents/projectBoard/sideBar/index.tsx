@@ -1,13 +1,15 @@
 import Tippy from '@tippyjs/react/headless'
-import FormAdd from 'components/pageComponents/home/ItemRight/FormAdd'
-// import { boardSeleted, getBoards, removeBoard, selectAllBoards } from 'features/AddBoard/addboardSlide'
 import { AiOutlineSetting } from 'react-icons/ai'
 import { BiChevronLeft, BiChevronDown, BiChevronRight } from 'react-icons/bi'
 import { BsPerson, BsThreeDots } from 'react-icons/bs'
 import { FaTrello } from 'react-icons/fa'
 import { HiPlusSm, HiOutlineClipboardList, HiOutlineCalendar } from 'react-icons/hi'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { getBoards, removeBoard, selectAllBoards } from 'features/AddBoard/addboardSlide'
+import { Navigate, useParams } from 'react-router-dom'
+import "./style.css";
+
 const itemtSidebar = [
     {
         title: "Bảng",
@@ -25,7 +27,29 @@ const itemtSidebar = [
     }
 ]
 export default function SideBar() {
-
+    const dispatch = useDispatch()
+    const listBoards = useRef<HTMLDivElement>(null);
+    const boards = useSelector(selectAllBoards)
+    const [isBoardPage, setIsBoardPage] = useState(false);
+    const { boardId } = useParams()
+    // const navigate = useNavigate();
+    useEffect(() => {
+        setIsBoardPage(window.location.pathname === `/board/${boardId}`);
+        if (listBoards.current) {
+            if (isBoardPage) {
+                listBoards.current.classList.add("active");
+            } else {
+                listBoards.current.classList.remove("list-board");
+            }
+        }
+    }, []);
+    useEffect(() => {
+        dispatch(getBoards());
+    }, [dispatch]);
+    const deleteBoard = (boardID: any) => {
+        dispatch(removeBoard(boardID));
+        <Navigate to="/" />
+    };
     return (
         <div className=' w-sidebar'>
             <div className=" h-full  backdrop-blur-lg border-0.5 border-[hsla(0,0%,100%,0.16)] flex flex-col items-center justify-between">
@@ -62,26 +86,15 @@ export default function SideBar() {
                     </div>
                     <div className=' flex items-center justify-between mb-1'>
                         <p className='text-sm text-white font-semibold mr-2 ml-2 mb-2'>Các bảng của bạn</p>
-                        {/* <Tippy
-                            trigger='click'
-                            placement='right'
-                            interactive
-                            render={attrs => (
-                                <div className=' w-64 bg-white rounded-sm shadow-boxsd mt-84' tabIndex={-1} {...attrs}>
-                                    <FormAdd />
-                                </div>
-                            )}
-                        > */}
-                            <div className='text-2xl mr-2 hover:bg-buttonnavhover p-0.5 rounded-sm text-white'><HiPlusSm /></div>
-                        {/* </Tippy> */}
+                        <div className='text-2xl mr-2 hover:bg-buttonnavhover p-0.5 rounded-sm text-white'><HiPlusSm /></div>
                     </div>
                     <div>
-                       
-                            <div >
-                                <div className='flex items-center justify-between py-2 pl-3 bg-buttonnavhover hover:bg-sidebarhover'>
+                        {boards.map((board) => (
+                            <div key={board._id}>
+                                <div className={`flex items-center justify-between py-2 pl-3  ${isBoardPage ? "list-board active" : "list-board"} hover:bg-sidebarhover `}>
                                     <div className='flex items-center'>
                                         <img className='w-6 h-5 mr-1 rounded-sm' src="https://trello-backgrounds.s3.amazonaws.com/SharedBackground/140x93/cd634b6f5db083968904538191fe3958/photo-1679041006302-cf5e318da08c.jpg" alt="" />
-                                        <p className='text-white text-xs'></p>
+                                        <p className='text-white text-xs'>{board.name}</p>
                                     </div>
                                     <Tippy
                                         trigger='click'
@@ -94,7 +107,7 @@ export default function SideBar() {
                                                         <p className='text-gray-500'></p>
                                                     </div>
                                                 </div>
-                                                <div className='flex items-center justify-between p-2 hover:bg-buttontask cursor-pointer' >
+                                                <div className='flex items-center justify-between p-2 hover:bg-buttontask cursor-pointer' onClick={() => deleteBoard(board._id)}>
                                                     <p className='text-gray-500'>Đóng bảng </p>
                                                     <BiChevronRight />
                                                 </div>
@@ -105,7 +118,7 @@ export default function SideBar() {
                                     </Tippy>
                                 </div>
                             </div>
-                        
+                        ))}
                     </div>
                 </div>
                 <div className='w-full flex justify-center border-t border-[hsla(0,0%,100%,0.16)] py-3 '>

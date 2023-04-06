@@ -2,9 +2,11 @@ import { Board } from "interfaces";
 import { axiosRequest } from "utils/axiosRequest";
 const factories = {
   getBoard: (data: Board) => {
+    const id = localStorage.getItem("_id");
+    // debugger
     return axiosRequest({
       method: "get",
-      url: `board/get?page=1&limit=20`,
+      url: `board/get?admin=${id}&page=1&limit=20`,
       data: data,
     });
   },
@@ -28,5 +30,11 @@ const factories = {
       url: `/board/${id}`,
     });
   },
+  getboardID: (id: string) => {
+    return axiosRequest({
+      method: "get",
+      url: `/board/getbyid/${id}`,
+    });
+  }
 };
 export default factories;

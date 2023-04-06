@@ -1,5 +1,4 @@
 export interface UserResponse {
-  _id: string;
   firstName: string;
   lastName: string;
   avatar: string;
@@ -8,6 +7,9 @@ export interface UserResponse {
   createdAt: Date;
   updatedAt: Date;
   token: string
+  "isExistsEmail":{
+    _id: string
+  }
 }
 export interface LoginState {
   info: UserResponse;

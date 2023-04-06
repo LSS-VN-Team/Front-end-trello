@@ -2,25 +2,29 @@ import { AiOutlineAppstore, AiOutlineSetting } from 'react-icons/ai'
 import { BsPerson } from 'react-icons/bs'
 import { MdOutlineBusinessCenter } from 'react-icons/md'
 import { TbClipboard } from 'react-icons/tb'
-import LastView from './Item/lastView'
-import OtherWork from './Item/ortherWork'
-import AddBoard from './Item/addBoard'
+import LastView from './lastView'
+import AddBoard from './addBoard'
+import OtherWork from './ortherWork'
 export interface HomeItemRightProps { }
 
 const itemright = [
     {
+        key: 1,
         title: "Bảng",
         icon: <TbClipboard />
     },
     {
+        key: 2,
         title: "Dạng xem",
         icon: <AiOutlineAppstore />
     },
     {
+        key: 3,
         title: "Thành viên",
         icon: <BsPerson />
     },
     {
+        key: 4,
         title: "Cài đặt",
         icon: <AiOutlineSetting />
     },
@@ -39,7 +43,7 @@ export default function HomeItemRight(props: HomeItemRightProps) {
                     <p className='text-base font-bold text-gray-600 '>Trello không gian làm việc</p>
                 </div>
                 {itemright.map((item) => (
-                    <div className='mx-1 rounded-sm px-3 py-1.5 bg-colorrightbtn hover:bg-colorrightbtnhover cursor-pointer'>
+                    <div className='mx-1 rounded-sm px-3 py-1.5 bg-colorrightbtn hover:bg-colorrightbtnhover cursor-pointer' key={item.key}>
                         <div className='flex items-center text-gray-600 '>
                             <div className='mr-1'>{item.icon}</div>
                             <p className='text-sm'>{item.title}</p>

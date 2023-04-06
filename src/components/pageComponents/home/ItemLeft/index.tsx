@@ -60,7 +60,7 @@ export default function HomeItemLeft(props: HomeItemLeftProps) {
     <div className="mt-7 w-homeitemleft mr-6 max-xl:w-1/2">
       <div className='border-b'>
         {ItemLeft.map((item) => (
-          <div className="flex items-center my-1 p-2 rounded-sm hover:bg-homeitemlefthover cursor-pointer ">
+          <div className="flex items-center my-1 p-2 rounded-sm hover:bg-homeitemlefthover cursor-pointer " key={item.key}>
             <div className="mr-3 text-lg">{item.icon}</div>
             <p className='text-sm font-bold text-gray-600'>{item.title}</p>
           </div>
@@ -79,7 +79,7 @@ export default function HomeItemLeft(props: HomeItemLeftProps) {
       </div>
       <div className='cursor-pointer'>
         {ItemLeftBot.map((item) => (
-          <div className='px-10 py-1.5 rounded-sm flex items-center my-4 justify-between hover:bg-homeitemlefthover'>
+          <div className='px-10 py-1.5 rounded-sm flex items-center my-4 justify-between hover:bg-homeitemlefthover' key={item.key}>
             <div className='flex'>
               <div className='text-lg mr-3'>{item.icon}</div>
               <p className='text-xs text-textcolor'>{item.title}</p>

@@ -6,7 +6,10 @@ export interface  HomePageProps {
 }
 
 export default function HomePage (props:  HomePageProps) {
-  
+  const token = localStorage.getItem('token');
+  if (!token) {
+    window.location.reload()
+  }
   return (
     <div className='h-full w-full'>
       <NavBar/>

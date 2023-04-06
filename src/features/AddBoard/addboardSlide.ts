@@ -37,6 +37,7 @@ export const boardSlice = createSlice({
     addBoardSuccess: (state: Draft<BoardState>, action: PayloadAction<Board>) => {
       state.status = "succeeded";
       state.boards.push(action.payload);
+      // debugger
     },
     addBoardFailure: (
       state: Draft<BoardState>,
@@ -88,6 +89,18 @@ export const boardSlice = createSlice({
     boardSeleted:(state: Draft<BoardState>, action: PayloadAction<Board>) => {
       state.boardSelected = action.payload
     },
+    getBoardsId(state) {
+      state.status = "loading";
+    },
+    getBoardsIdSuccess(state, action) {
+      state.status = "succeeded";
+      state.boards = action.payload;
+      // debugger
+    },
+    getBoardsIdFailure(state, action) {
+      state.status = "failed";
+      state.error = action.payload;
+    },
   },
 });
 
@@ -105,6 +118,9 @@ export const {
   removeBoard,
   removeBoardSuccess,
   removeBoardFailure,
+  getBoardsId,
+  getBoardsIdSuccess,
+  getBoardsIdFailure,
 } = boardSlice.actions;
 
 export const selectAllBoards = (state: RootState) => state.board.boards;

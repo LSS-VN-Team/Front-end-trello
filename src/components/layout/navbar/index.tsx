@@ -5,8 +5,9 @@ import { BsChevronDown, BsChevronRight } from "react-icons/bs";
 import { TbBellRinging2 } from "react-icons/tb"
 import "./style.css";
 import Tippy from "@tippyjs/react/headless";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logoutPage } from "features/login/loginSlide";
+import { useParams } from "react-router-dom";
 
 interface NavBarProps { }
 
@@ -35,14 +36,17 @@ export default function NavBar(props: NavBarProps) {
     const dispatch = useDispatch()
     const handleclickLogout = () => {
         dispatch(logoutPage())
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.reload()
+        }
     }
-    
 
-    useEffect(() => {
-        setIsBoardPage(window.location.pathname === "/board");
-    }, []);
+    const { boardId } = useParams()
 
+   
     useEffect(() => {
+        setIsBoardPage(window.location.pathname === `/board/${boardId}`);
         if (navbarRef.current) {
             if (isBoardPage) {
                 navbarRef.current.classList.add("active");
@@ -50,7 +54,7 @@ export default function NavBar(props: NavBarProps) {
                 navbarRef.current.classList.remove("navbar-transparent");
             }
         }
-    }, [isBoardPage]);
+    }, []);
 
     return (
         <div
@@ -76,7 +80,8 @@ export default function NavBar(props: NavBarProps) {
                                         max-sm:hidden
                                         max-lg:hidden
                                         ${isBoardPage ? "hover:bg-zinc-600" : ""}`
-                            }>
+                            }
+                            key={item.key}>
                             <p className="px-1 text-white text-sm">{item.title}</p>
                             <BsChevronDown className="text-white text-sm font-bold" />
                         </div>

@@ -8,10 +8,9 @@ import { IRegister } from "interfaces";
 
 const initialState: LoginState = {
   isLoading: false,
-  error: "",
+  error: "đăng nhập thất bại",
   isLoggedIn: false,
   info: {
-    _id: "",
     firstName: "",
     lastName: "",
     avatar: "",
@@ -20,10 +19,12 @@ const initialState: LoginState = {
     createdAt: new Date(),
     updatedAt: new Date(),
     token: "",
+    isExistsEmail:{
+      _id:""
+    }
   },
 };
-const token = localStorage.getItem("token");
-
+const id = initialState.info.isExistsEmail._id;
 
 export const loginSlice = createSlice({
   
@@ -38,8 +39,6 @@ export const loginSlice = createSlice({
       state.error = "";
       state.isLoggedIn = true;
       state.info = action.payload;
-      console.log(token);
-      
     },
     loginHomeFailure: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
@@ -51,7 +50,7 @@ export const loginSlice = createSlice({
       state.error = "";
       state.isLoggedIn = false;
       state.info = {
-        _id: "",
+       
         firstName: "",
         lastName: "",
         avatar: "",
@@ -60,8 +59,13 @@ export const loginSlice = createSlice({
         createdAt: new Date(),
         updatedAt: new Date(),
         token: "",
+        isExistsEmail:{
+          _id:""
+        }
       };
+      
       localStorage.removeItem("token")
+      localStorage.removeItem(id)
     },
   },
 });

@@ -2,11 +2,27 @@ import { AiOutlineStar } from 'react-icons/ai'
 import { BsPerson, BsFillLightningChargeFill, BsPersonPlus, BsThreeDots } from 'react-icons/bs'
 import { BiChevronDown, BiRocket, BiFilter } from 'react-icons/bi'
 import { HiOutlineViewBoards } from 'react-icons/hi'
+import { useParams } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from 'app/hooks';
+import { getBoardsId, selectAllBoards } from 'features/AddBoard/addboardSlide';
 export default function Header() {
+    // const dispatch = useDispatch()
+    const boards = useAppSelector(selectAllBoards)
+    console.log(boards)
+    const data = boards
+    const { boardId } = useParams();
+    let targetName = '';
+    for (let i = 0; i < data.length; i++) {
+        if (data[i]._id === boardId) {
+          targetName = data[i].name;
+          break;
+        }
+      }
     return (
         <div className='flex justify-between flex-wrap'>
             <div className='flex items-center p-3 flex-wrap'>
-                <p className="text-lg text-white font-bold pr-2">test</p>
+                <p className="text-lg text-white font-bold pr-2">{targetName}</p>
                 <div className='text-xl text-white p-1.5 rounded-sm bg-sidebarhover hover:text-yellow-500'>
                     <AiOutlineStar className='' />
                 </div>

@@ -1,18 +1,22 @@
+import { boardSlice } from './../features/Board/BoardSlice';
 import { configureStore } from "@reduxjs/toolkit";
-import boardsReducer from "features/Board/BoardSlice";
-import loginReducer from "features/login/loginSlide";
 import userReducer from "features/getuser/userslide";
-import createSagaMiddleware from "redux-saga";
-import rootSaga from "./rootSaga";
-import taskCardReducer from "features/taskCard/taskCardSlide";
+import boardsReducer from 'features/Board/BoardSlice'
+import loginReducer from 'features/login/loginSlide';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './rootSaga';
+import taskReducer from 'features/task/taskSlide';
+import cardReducer from 'features/card/cardSlide'
+
 
 const sagaMiddleware = createSagaMiddleware();
 export const store = configureStore({
   reducer: {
     login: loginReducer,
     board: boardsReducer,
-    taskCard: taskCardReducer,
     user: userReducer,
+    card: cardReducer,
+    task: taskReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

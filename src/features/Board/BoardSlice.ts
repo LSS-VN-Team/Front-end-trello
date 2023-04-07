@@ -58,6 +58,7 @@ export const boardSlice = createSlice({
       if (existingBoard) {
         Object.assign(existingBoard, editedBoard);
       }
+      // debugger
     },
     editBoardFailure: (
       state: Draft<BoardState>,
@@ -124,5 +125,6 @@ export const {
 } = boardSlice.actions;
 
 export const selectAllBoards = (state: RootState) => state.board.boards;
+export const selectBoards = (state: RootState) => state.board.boardSelected;
 
 export default boardSlice.reducer;

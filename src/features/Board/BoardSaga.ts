@@ -16,7 +16,7 @@ import {
   getBoardsId,
   getBoardsIdSuccess,
   getBoardsIdFailure,
-} from "./addboardSlide";
+} from "./BoardSlice";
 import { Board } from "interfaces";
 import factories from "./factories";
 
@@ -56,6 +56,7 @@ function* handleEditBoard() {
   yield takeEvery(editBoard.type, function* (payload: PayloadAction<Board>) {
     try {
       const response: any = yield call(factories.editBoard, payload.payload);
+      // debugger
       yield put(editBoardSuccess(response));
     } catch (error: any) {
       yield put(editBoardFailure(error.message));
@@ -66,7 +67,7 @@ function* handleRemoveBoard() {
   yield takeEvery(removeBoard.type, function* (action: PayloadAction<string>) {
     try {
       const response: any = yield call(factories.removeBoard, action.payload);
-      window.location.href = '/'
+      alert("xóa thành công")
       yield put(removeBoardSuccess(response.data));
     } catch (error: any) {
       yield put(removeBoardFailure(error.message));

@@ -1,14 +1,13 @@
 import Tippy from "@tippyjs/react/headless"
 import { useDispatch, useSelector } from "react-redux"
-import { getBoards, getBoardsId, selectAllBoards } from "features/AddBoard/addboardSlide"
+import { boardSeleted, getBoards, getBoardsId, selectAllBoards } from "features/Board/BoardSlice"
 import { useEffect } from "react"
 import { useRef, useState } from "react"
 import { BsThreeDots, BsPerson } from "react-icons/bs"
 import { BiLock } from 'react-icons/bi'
 import { GiEarthAmerica } from 'react-icons/gi'
-import { addBoard } from "features/AddBoard/addboardSlide"
+import { addBoard } from "features/Board/BoardSlice"
 import { Link } from "react-router-dom"
-import { ROUTES } from "constants/routers"
 export interface AddBoardProps {
 
 }
@@ -56,10 +55,11 @@ const colorTheme = [
 export default function AddBoard(props: AddBoardProps) {
     const [inputValue, setInputValue] = useState("")
     const [privacy, setPrivacy] = useState('Không gian làm việc');
+    const [showForm, setShowForm] = useState(false)
+
     const buttonRef = useRef(null)
     const dispatch = useDispatch()
     const boards = useSelector(selectAllBoards)
-
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
@@ -78,13 +78,11 @@ export default function AddBoard(props: AddBoardProps) {
             dispatch(addBoard(newBoard))
         }
         setInputValue("")
+        setShowForm(false)
     }
     const handlegetboardbyid = (boardId: any) => {
         dispatch(getBoardsId(boardId))
-        // debugger
-        console.log(handlegetboardbyid);
     }
-
     useEffect(() => {
         dispatch(getBoards());
     }, [dispatch]);
@@ -105,6 +103,7 @@ export default function AddBoard(props: AddBoardProps) {
                             trigger='click'
                             placement='right'
                             interactive
+                            visible={showForm}
                             render={attrs => (
                                 <div className=' w-64 bg-white rounded-sm shadow-boxsd mt-84' tabIndex={-1} {...attrs}>
                                     <form onSubmit={(e) => e.preventDefault()} >
@@ -191,7 +190,7 @@ export default function AddBoard(props: AddBoardProps) {
                             )}
                         >
                             <div className='mr-3 '>
-                                <div className='w-48 h-24 rounded-sm bg-gray-200 flex items-center cursor-pointer hover:bg-gray-300' >
+                                <div className='w-48 h-24 rounded-sm bg-gray-200 flex items-center cursor-pointer hover:bg-gray-300' onClick={()=> setShowForm(true)}>
                                     <p className='text-center w-full text-sm'>Tạo bảng mới</p>
                                 </div>
                             </div>

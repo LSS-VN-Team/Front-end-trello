@@ -5,7 +5,6 @@ import { ILogin } from "interfaces";
 import { LoginState, UserResponse } from "./interface";
 import { IRegister } from "interfaces";
 
-
 const initialState: LoginState = {
   isLoading: false,
   error: "đăng nhập thất bại",
@@ -19,15 +18,14 @@ const initialState: LoginState = {
     createdAt: new Date(),
     updatedAt: new Date(),
     token: "",
-    isExistsEmail:{
-      _id:""
-    }
+    isExistsEmail: {
+      _id: "",
+      
+    },
   },
 };
-const id = initialState.info.isExistsEmail._id;
 
 export const loginSlice = createSlice({
-  
   name: "login",
   initialState,
   reducers: {
@@ -39,6 +37,7 @@ export const loginSlice = createSlice({
       state.error = "";
       state.isLoggedIn = true;
       state.info = action.payload;
+      // debugger
     },
     loginHomeFailure: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
@@ -50,7 +49,6 @@ export const loginSlice = createSlice({
       state.error = "";
       state.isLoggedIn = false;
       state.info = {
-       
         firstName: "",
         lastName: "",
         avatar: "",
@@ -59,13 +57,14 @@ export const loginSlice = createSlice({
         createdAt: new Date(),
         updatedAt: new Date(),
         token: "",
-        isExistsEmail:{
-          _id:""
-        }
+        isExistsEmail: {
+          _id: "",
+          
+        },
       };
-      
-      localStorage.removeItem("token")
-      localStorage.removeItem(id)
+
+      localStorage.removeItem("token");
+      localStorage.removeItem("_id");
     },
   },
 });
@@ -105,7 +104,6 @@ export const {
 
 export const { loginHome, loginHomeSuccess, loginHomeFailure, logoutPage } =
   loginSlice.actions;
-
 
 export const selectIsLoading = (state: RootState) => state.login.isLoading;
 export const selectError = (state: RootState) => state.login.error;

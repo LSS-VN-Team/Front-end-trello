@@ -21,7 +21,7 @@ function* handleLogin() {
         payload.payload.Navigate("/");
         yield put({
           type: loginHomeSuccess.type,
-          payload: response.data.data,
+          payload: response.data.data.data,
         });
       } else {
         yield put({

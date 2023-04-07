@@ -20,7 +20,7 @@ const factories = {
    editBoard: (data: Board) => {
     return axiosRequest({
       method: "put",
-      url: `/board/getbyid/${data._id}`,
+      url: `/board/${data._id}`,
       data: data,
     });
   },

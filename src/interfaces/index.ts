@@ -27,3 +27,7 @@ export interface TaskCard {
   name: string;
   BoardId?: string;
 }
+export interface UserResponseData {
+  email: string;
+  name: string;
+}

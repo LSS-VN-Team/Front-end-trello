@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { useAppDispatch, useAppSelector } from "app/hooks";
+import { useAppDispatch} from "app/hooks";
 import { loginHome } from "features/login/loginSlide";
 import { useNavigate, Link, Navigate } from "react-router-dom";
-import { Outlet } from "react-router-dom";
 import { ROUTES } from "constants/routers";
 
 interface LoginPageProps {}

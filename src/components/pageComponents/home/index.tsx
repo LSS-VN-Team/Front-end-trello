@@ -1,5 +1,5 @@
-import HomeItemLeft from "./ItemLeft";
-import HomeItemRight from "./ItemRight";
+import HomeItemLeft from "./menuLeft";
+import HomeItemRight from "./listBoard";
 
 export interface HomeItemProps {
 

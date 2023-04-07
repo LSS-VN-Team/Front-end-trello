@@ -15,12 +15,13 @@ function* handleLogin() {
       );
       if (response.data.data.success) {
         const token = response.data.data.data.token;
+        const id = response.data.data.data.isExistsEmail._id
         localStorage.setItem("token", token);
+        localStorage.setItem("_id", id);
         payload.payload.Navigate("/");
-        alert("dang nhap thanh cong");
         yield put({
           type: loginHomeSuccess.type,
-          payload: response.data.data,
+          payload: response.data.data.data,
         });
       } else {
         yield put({
@@ -29,6 +30,7 @@ function* handleLogin() {
         });
       }
     } catch (error) {
+      alert("đăng nhập thất bại");
       yield put({
         type: loginHomeFailure.type,
         // error

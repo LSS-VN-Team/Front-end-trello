@@ -1,12 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 import { AiOutlineSearch, AiOutlineQuestionCircle, AiOutlinePlus } from "react-icons/ai";
-import { MdOutlineApps } from "react-icons/md";
+import { MdOutlineApps, MdOutlineManageAccounts } from "react-icons/md";
 import { BsChevronDown, BsChevronRight } from "react-icons/bs";
 import { TbBellRinging2 } from "react-icons/tb"
 import "./style.css";
 import Tippy from "@tippyjs/react/headless";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutPage } from "features/login/loginSlide";
+import { useParams } from "react-router-dom";
+import { getUsersId, selectAllUser } from "features/getuser/userslide";
 
 interface NavBarProps { }
 
@@ -33,16 +35,23 @@ export default function NavBar(props: NavBarProps) {
     const navbarRef = useRef<HTMLDivElement>(null);
     const [isBoardPage, setIsBoardPage] = useState(false);
     const dispatch = useDispatch()
+    const user = useSelector(selectAllUser)
+
+    useEffect(() => {
+        dispatch(getUsersId());
+    }, [dispatch]);
     const handleclickLogout = () => {
         dispatch(logoutPage())
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.reload()
+        }
     }
-    
+
+    const { boardId } = useParams()
 
     useEffect(() => {
-        setIsBoardPage(window.location.pathname === "/board");
-    }, []);
-
-    useEffect(() => {
+        setIsBoardPage(window.location.pathname === `/board/${boardId}`);
         if (navbarRef.current) {
             if (isBoardPage) {
                 navbarRef.current.classList.add("active");
@@ -50,7 +59,7 @@ export default function NavBar(props: NavBarProps) {
                 navbarRef.current.classList.remove("navbar-transparent");
             }
         }
-    }, [isBoardPage]);
+    }, []);
 
     return (
         <div
@@ -76,7 +85,8 @@ export default function NavBar(props: NavBarProps) {
                                         max-sm:hidden
                                         max-lg:hidden
                                         ${isBoardPage ? "hover:bg-zinc-600" : ""}`
-                            }>
+                            }
+                            key={item.key}>
                             <p className="px-1 text-white text-sm">{item.title}</p>
                             <BsChevronDown className="text-white text-sm font-bold" />
                         </div>
@@ -126,9 +136,33 @@ export default function NavBar(props: NavBarProps) {
                         trigger="click"
                         interactive
                         render={attrs => (
-                            <div className=' w-64 bg-white h-[300px] rounded-sm shadow-boxsd ' tabIndex={-1} {...attrs}>
-                                <div className="flex items-center cursor-pointer" onClick={handleclickLogout}>
-                                    <button className="w-full">đăng xuất</button>
+                            <div className=' w-64 bg-white  rounded-sm shadow-boxsd ' tabIndex={-1} {...attrs}>
+                                <div  >
+                                    <div className="text-gray-400 font-bold text-xs py-1"><p className="ml-4">TÀI KHOẢN</p></div>
+                                    <div className="flex items-center w-full py-1">
+                                        <img className="rounded-full  w-9 h-9 mr-4 ml-4" alt="" src="https://trello-members.s3.amazonaws.com/64190d6836236e371c566da7/bc6393e9d68b04800fc5ef1e1ee97d43/30.png" />
+
+                                        <div>
+                                            <p className="">{user?.name}</p>
+                                            <p className="text-sm text-gray-400">{user?.email}</p>
+                                        </div>
+
+                                    </div>
+                                    <div className="py-2 text-sm w-full cursor-pointer hover:bg-gray-100"><p className="ml-4">Chuyển đổi tài khoản</p> </div>
+                                    <div className="flex text-sm items-center justify-between py-2 cursor-pointer hover:bg-gray-100 mb-3">
+                                        <p className="ml-4">Quản lý tài khoản</p>
+                                        <MdOutlineManageAccounts className="mr-4"/>
+                                    </div>
+                                    <div className="py-3 border-y w-full">
+                                        <div className="py-2 text-sm text-gray-400 font-bold"><p className="ml-4">TRELLO</p></div>
+                                        <div className="py-2 text-sm cursor-pointer hover:bg-gray-100"><p className="ml-4">Hồ sơ và Hiển thị</p></div>
+                                        <div className="py-2 text-sm cursor-pointer hover:bg-gray-100"><p className="ml-4">Hoạt động</p></div>
+                                        <div className="py-2 text-sm cursor-pointer hover:bg-gray-100"><p className="ml-4">Thẻ</p></div>
+                                        <div className="py-2 text-sm cursor-pointer hover:bg-gray-100"><p className="ml-4">Cài đặt</p></div>
+                                    </div>
+                                    <div className="py-2 text-sm cursor-pointer hover:bg-gray-100"><p className="ml-4">Trợ giúp</p></div>
+                                    <div className="py-2 text-sm cursor-pointer hover:bg-gray-100"><p className="ml-4">Phím tắt</p></div>
+                                    <div className="py-2 text-sm w-full cursor-pointer hover:bg-gray-100 mb-4" onClick={handleclickLogout}><p className="ml-4">Đăng xuất</p></div>
                                 </div>
                             </div>
                         )}

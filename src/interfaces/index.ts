@@ -8,7 +8,7 @@ export interface ILogin {
 export interface Board {
   _id?:string;
   name: string;
-  
+  admin:string
 }
 
 export interface ResponseData {
@@ -26,4 +26,8 @@ export interface TaskCard {
   _id?: string;
   name: string;
   BoardId?: string;
+}
+export interface UserResponseData {
+  email: string;
+  name: string;
 }

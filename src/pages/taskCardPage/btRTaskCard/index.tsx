@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { deleteTaskCard, selectAllCard } from "features/taskCard/taskCardSlide";
+import { deleteCard, selectAllCard } from "features/card/cardSlide";
 import { CiUser } from "react-icons/ci";
 import { BsTag, BsCheck2Square, BsClock, BsArchive } from "react-icons/bs";
 import { HiOutlinePaperClip } from "react-icons/hi";
@@ -95,13 +95,13 @@ export default function BTRTaskCardPage(props: BTRTaskCardPageProps) {
     const btn1 = "user13";
     const item = iconBR.find((item) => item.key === btn1);
     if (item) {
-      dispatch(deleteTaskCard(cardId));
+      dispatch(deleteCard(cardId));
     }
   };
 
   return (
     <>
-      <div className="h-full w-1/4 bg-gray-50-300">
+      <div className="h-fit w-1/4 bg-gray-50-300 mb-10">
         {iconBR.map((item) => (
           <div
             key={item.key}

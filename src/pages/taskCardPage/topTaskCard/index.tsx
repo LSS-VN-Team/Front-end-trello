@@ -3,6 +3,8 @@ import { FaTimes } from "react-icons/fa";
 import { TbDeviceLaptop } from "react-icons/tb";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
+import { Link } from "react-router-dom";
+
 
 interface TaskCardPageProps {}
 
@@ -41,9 +43,10 @@ export default function TaskCardPage(props: TaskCardPageProps) {
         />
       </div>
       <div className="h-full w-1/6 ">
-        <a href="">
-          <FaTimes className=" mt-2 bg-slate-100 bg-opacity-40 hover:bg-slate-100 hover:bg-opacity-60 h-9 w-9 ml-20 rounded-full p-2 pl-2" />
-        </a>
+        <Link to="/board">
+          <FaTimes  className=" mt-2 bg-slate-100 bg-opacity-40 hover:bg-slate-100 hover:bg-opacity-60 h-9 w-9 ml-20 rounded-full p-2 pl-2" />
+        
+        </Link>
         <span ref={coverRef}>
           <Tippy
             content="This is the cover tooltip"

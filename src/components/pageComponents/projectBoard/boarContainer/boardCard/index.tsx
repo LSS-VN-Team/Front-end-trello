@@ -1,16 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
 import TaskForm from "./taskForm";
-import { AiOutlinePlus } from "react-icons/ai";
-import { BsPencil, BsThreeDots } from "react-icons/bs";
+import { BsThreeDots } from "react-icons/bs";
 import { HiPlusSm, HiOutlineTemplate } from "react-icons/hi";
-import { GrFormClose } from "react-icons/gr";
+import { useAppSelector } from "app/hooks";
+import { useAppDispatch } from "app/hooks";
+import { getTasks, selectAllTask } from "features/task/taskSlide";
 
 interface BoardProps {
-  title: string;
-  typeBoard: string;
+  title?: string;
+  idCard?: string;
 }
 
-const Board: React.FC<BoardProps> = ({ title, typeBoard }) => {
+const Board: React.FC<BoardProps> = ({ title, idCard }) => {
   const [showTaskForm, setShowTaskForm] = useState<boolean>(false);
   const [tasks, setTasks] = useState<string[]>([]);
   const [activeTaskIndex, setActiveTaskIndex] = useState<number>(-1);
@@ -37,51 +38,29 @@ const Board: React.FC<BoardProps> = ({ title, typeBoard }) => {
   const addTask = (task: string) => {
     setTasks([...tasks, task]);
     setShowTaskForm(false);
-  };
-  const deleteTask = (index: number) => {
-    const newTasks = [...tasks];
-    newTasks.splice(index, 1);
-    setTasks(newTasks);
+    
   };
 
-  const changeTask = (index: number, newTask: string | null) => {
-    if (!newTask) return;
-
-    const newTasks = [...tasks];
-    newTasks[index] = newTask;
-    setTasks(newTasks);
-  };
-
-  const handleFormCancel = () => {
-    setShowTaskForm(false);
-  };
+  const task = useAppSelector(selectAllTask);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getTasks());
+  }, [dispatch]);
 
   return (
     <div className="w-card p-2">
       <div className="" ref={boardRef}>
         <div className="flex items-center justify-between">
-          <p className={typeBoard}>{title}</p>
+          <p className={idCard}>{title}</p>
           <div className="p-1 rounded-sm hover:bg-cardbtn">
             <BsThreeDots />
           </div>
         </div>
         <div className="list">
-          {tasks.map((task, index) => (
+          {task.map((tasks) => (
             <div className="my-1 p-1 bg-white shadow-inputsd rounded-sm">
-              <p
-                key={index}
-                className="break-words"
-                onMouseEnter={() => setActiveTaskIndex(index)}
-                onMouseLeave={() => setActiveTaskIndex(-1)}
-                draggable
-                onDragStart={(e) => e.dataTransfer.setData("task", task)}
-              >
-                {task}
-                {activeTaskIndex === index && (
-                  <button className="p-1.5 hover:bg-gray-300 rounded-sm ">
-                    <BsPencil className="text-xs text-gray-500 " />
-                  </button>
-                )}
+              <p className="break-words">
+                {tasks.title}
               </p>
             </div>
           ))}

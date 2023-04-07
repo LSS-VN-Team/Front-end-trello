@@ -1,21 +1,22 @@
-import { TaskCard } from "interfaces";
+import {  Task } from "interfaces";
 import { axiosRequest } from "utils/axiosRequest";
 
 const factories = {
   fetchTasks: () => {
     return axiosRequest({
       method: "get",
-      url: `TaskCard`,
+      url: `Task`,
+      
     });
   },
-  createTask: (data: TaskCard) => {
+  createTask: (data: Task) => {
     return axiosRequest({
       method: "post",
-      url: `TaskCard`,
+      url: `Task`,
       data: data,
     });
   },
-  updateTask: (data: TaskCard) => {
+  updateTask: (data: Task) => {
     return axiosRequest({
       method: "put",
       url: `TaskCard/${data._id}`,

@@ -28,7 +28,7 @@ export default function TaskCardComponent(props: TaskCardComponentProps) {
       <div className="h-12 w-full"></div>
       <div
         id="taskCardDiv"
-        className="h-taskCardH w-taskCardW m-auto"
+        className="h-fit w-taskCardW m-auto"
       >
         <div className="relative z-10 overflow-y-auto rounded shadow-2xl h-full w-full bg-white">
           <div className="h-1/6 w-full bg-amber-300">

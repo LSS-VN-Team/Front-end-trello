@@ -2,26 +2,26 @@ import { useAppDispatch, useAppSelector } from "app/hooks";
 import React, { useState, useRef, FormEvent } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { GrFormClose } from "react-icons/gr";
-import { TaskCard } from "interfaces";
-import { addTaskCard, selectAllCard } from "features/taskCard/taskCardSlide";
+import { Card } from "interfaces";
+import { addTasks, selectAllTask } from "features/task/taskSlide";
 interface TaskFormProps {
   onSubmit: (inputValue: string) => void;
 }
 const TaskForm: React.FC<TaskFormProps> = ({ onSubmit }) => {
   const [inputValue, setInputValue] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
-  const task = useAppSelector(selectAllCard);
+  const task = useAppSelector(selectAllTask);
   const dispatch = useAppDispatch();
 
   const handleSubmit = () => {
     if (!inputValue) {
       return;
     }
-    const newTaskCard = {
-      name: inputValue,
-      BoardId: "",
+    const newTask = {
+      title: inputValue,
+      idCard: "",
     };
-    dispatch(addTaskCard(newTaskCard));
+    dispatch(addTasks(newTask));
     setInputValue("");
   };
 

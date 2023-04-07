@@ -33,6 +33,8 @@ function* handleAddBoard() {
     try {
       const response: any = yield call(factories.addBoard, action.payload);
       yield put(addBoardSuccess(response.data.data));
+      // console.log('tan');
+      
     } catch (error: any) {
       yield put(addBoardFailure(error.message));
     }

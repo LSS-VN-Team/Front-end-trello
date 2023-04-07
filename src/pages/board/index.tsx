@@ -1,6 +1,6 @@
 import NavBar from "components/layout/navbar";
 import SideBar from "components/pageComponents/projectBoard/sideBar";
-import BoardContainer from "components/pageComponents/projectBoard/boarContainer";
+import Card from "components/pageComponents/projectBoard/boarContainer";
 
 export default function ProjectBoard() {
   return (
@@ -8,7 +8,7 @@ export default function ProjectBoard() {
       <NavBar />
       <div className="flex h-sidebar w-full">
         <SideBar />
-        <BoardContainer />
+        <Card />
       </div>
     </div>
   );

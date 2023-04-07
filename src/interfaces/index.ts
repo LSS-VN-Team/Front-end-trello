@@ -22,8 +22,12 @@ export interface IRegister {
   name: string;
 }
 
-export interface TaskCard {
+export interface Card {
   _id?: string;
   name: string;
   BoardId?: string;
+}
+export interface Task {
+  _id?: string;
+  title: string;
 }

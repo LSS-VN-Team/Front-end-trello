@@ -5,7 +5,6 @@ import { ILogin } from "interfaces";
 import { LoginState, UserResponse } from "./interface";
 import { IRegister } from "interfaces";
 
-
 const initialState: LoginState = {
   isLoading: false,
   error: "",
@@ -20,13 +19,15 @@ const initialState: LoginState = {
     createdAt: new Date(),
     updatedAt: new Date(),
     token: "",
+    // taskList:{
+    // _id:""
+    // }
   },
 };
 const token = localStorage.getItem("token");
-
+// const id = initialState.info.taskList._id;
 
 export const loginSlice = createSlice({
-  
   name: "login",
   initialState,
   reducers: {
@@ -39,7 +40,6 @@ export const loginSlice = createSlice({
       state.isLoggedIn = true;
       state.info = action.payload;
       console.log(token);
-      
     },
     loginHomeFailure: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
@@ -61,7 +61,7 @@ export const loginSlice = createSlice({
         updatedAt: new Date(),
         token: "",
       };
-      localStorage.removeItem("token")
+      localStorage.removeItem("token");
     },
   },
 });
@@ -101,7 +101,6 @@ export const {
 
 export const { loginHome, loginHomeSuccess, loginHomeFailure, logoutPage } =
   loginSlice.actions;
-
 
 export const selectIsLoading = (state: RootState) => state.login.isLoading;
 export const selectError = (state: RootState) => state.login.error;

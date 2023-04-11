@@ -1,19 +1,23 @@
 import { createSlice, PayloadAction, Draft } from "@reduxjs/toolkit";
 import { RootState } from "app/store";
-import { Board } from "interfaces";
+import { Board, LastView } from "interfaces";
 
 interface BoardState {
   boards: Board[];
   status: "nothing" | "loading" | "succeeded" | "failed";
   error: string | null;
-  boardSelected:Board | null
+  boardSelected: Board | null;
+  boarddetal: string | null;
+  lastview: LastView[];
 }
 
 const initialState: BoardState = {
   boards: [],
   status: "nothing",
   error: null,
-  boardSelected: null
+  boardSelected: null,
+  boarddetal: null,
+  lastview: [],
 };
 
 export const boardSlice = createSlice({
@@ -34,7 +38,10 @@ export const boardSlice = createSlice({
     addBoard: (state: Draft<BoardState>, action: PayloadAction<Board>) => {
       state.status = "loading";
     },
-    addBoardSuccess: (state: Draft<BoardState>, action: PayloadAction<Board>) => {
+    addBoardSuccess: (
+      state: Draft<BoardState>,
+      action: PayloadAction<Board>
+    ) => {
       state.status = "succeeded";
       state.boards.push(action.payload);
       // debugger
@@ -49,7 +56,10 @@ export const boardSlice = createSlice({
     editBoard: (state: Draft<BoardState>, action: PayloadAction<Board>) => {
       state.status = "loading";
     },
-    editBoardSuccess: (state: Draft<BoardState>, action: PayloadAction<Board>) => {
+    editBoardSuccess: (
+      state: Draft<BoardState>,
+      action: PayloadAction<Board>
+    ) => {
       state.status = "succeeded";
       const editedBoard = action.payload;
       const existingBoard = state.boards.find(
@@ -87,18 +97,30 @@ export const boardSlice = createSlice({
       state.status = "failed";
       state.error = action.payload;
     },
-    boardSeleted:(state: Draft<BoardState>, action: PayloadAction<Board>) => {
-      state.boardSelected = action.payload
+    boardSeleted: (state: Draft<BoardState>, action: PayloadAction<Board>) => {
+      state.boardSelected = action.payload;
     },
-    getBoardsId(state) {
+    getBoardsId(state, action: PayloadAction<string>) {
       state.status = "loading";
     },
     getBoardsIdSuccess(state, action) {
       state.status = "succeeded";
-      state.boards = action.payload;
+      state.boarddetal = action.payload;
       // debugger
     },
     getBoardsIdFailure(state, action) {
+      state.status = "failed";
+      state.error = action.payload;
+    },
+    lastView(state, action: PayloadAction<any>) {
+      state.status = "loading";
+    },
+    lastViewSuccess(state, action) {
+      state.status = "succeeded";
+      state.lastview = action.payload;
+      // debugger
+    },
+    lastViewFailure(state, action) {
       state.status = "failed";
       state.error = action.payload;
     },
@@ -122,6 +144,9 @@ export const {
   getBoardsId,
   getBoardsIdSuccess,
   getBoardsIdFailure,
+  lastView,
+  lastViewFailure,
+  lastViewSuccess,
 } = boardSlice.actions;
 
 export const selectAllBoards = (state: RootState) => state.board.boards;

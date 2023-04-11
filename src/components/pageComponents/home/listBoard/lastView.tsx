@@ -1,14 +1,19 @@
 import { AiOutlineClockCircle } from 'react-icons/ai'
-export interface LastViewProps { }
-const board = [
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from "react"
+import { getLastView, selectAllLastView } from 'features/getBoardLastView/LastViewSlice'
 
-    {
-        key: 1,
-        title: "test",
-        ulr: "https://images.unsplash.com/photo-1679214523859-c78a0bea016d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8N3x8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
-    },
-]
+export interface LastViewProps { }
+
 export default function LastView(props: LastViewProps) {
+    const dispatch = useDispatch()
+    const last = useSelector(selectAllLastView)
+    console.log("dwdw",last);
+    
+    useEffect(() => {
+        dispatch(getLastView());
+    }, [dispatch]);
+
     return (
         <div>
             <div className=' flex items-center my-1'>
@@ -18,10 +23,10 @@ export default function LastView(props: LastViewProps) {
                 <p className='text-base font-bold text-gray-600'>Đã xem gần đây</p>
             </div>
             <div className='flex mt-4'>
-                {board.slice().reverse().map((item) => (
-                    <div className='mr-3' key={item.key}>
-                        <p className='absolute text-white text-base font-bold p-2'>{item.title}</p>
-                        <img className='w-48 h-24 rounded-df cursor-pointer' src={item.ulr} alt="" />
+               {last.map((item)=>(
+                    <div className='mr-3' >
+                        <p className='absolute text-white text-base font-bold p-2'>{item.name}</p>
+                        <img className='w-48 h-24 rounded-df cursor-pointer' src="https://images.unsplash.com/photo-1679214523859-c78a0bea016d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDJ8MzE3MDk5fHx8fHwyfHwxNjc5NDYzMTMz&ixlib=rb-4.0.3&q=80&w=400" alt="" />
                     </div>
                 ))}
             </div>

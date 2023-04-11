@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Tippy from '@tippyjs/react/headless'
 import { AiOutlineSetting, AiOutlineStar, AiOutlineClose } from 'react-icons/ai'
 import { BsPerson, BsFillLightningChargeFill, BsPersonPlus, BsThreeDots } from 'react-icons/bs'
 import { BiChevronLeft, BiChevronDown, BiRocket, BiFilter, BiLock } from 'react-icons/bi'
 import { FaTrello } from 'react-icons/fa'
 import { HiPlusSm, HiOutlineClipboardList, HiOutlineCalendar, HiOutlineViewBoards } from 'react-icons/hi'
-import { addBoard, boardSeleted, editBoard, getBoards, getBoardsId, removeBoard, selectAllBoards, selectBoards } from 'features/Board/BoardSlice'
+import { addBoard, boardSeleted, editBoard, getBoards, getBoardsId, lastView, removeBoard, selectAllBoards, selectBoards } from 'features/Board/BoardSlice'
 import { GiEarthAmerica } from 'react-icons/gi'
 
 const itemtSidebar = [
@@ -75,8 +75,8 @@ export default function ProjectBoard() {
     const boards = useSelector(selectAllBoards)
     const boardSelect = useSelector(selectBoards)
     const { boardId } = useParams();
-    const data = boards
     const buttonRef = useRef(null)
+    const navigate = useNavigate()
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
@@ -121,7 +121,8 @@ export default function ProjectBoard() {
 
     const deleteBoard = (boardID: any) => {
         dispatch(removeBoard(boardID));
-        window.location.href = '/'
+        navigate("/")
+        
     };
 
     useEffect(() => {
@@ -135,10 +136,18 @@ export default function ProjectBoard() {
         }
     }, [boardSelect])
 
+    
+
+    useEffect(() => {
+        if (boardId) {
+            dispatch(getBoardsId(boardId))
+        }
+    }, [boardId])
+
     let targetName = '';
-    for (let i = 0; i < data.length; i++) {
-        if (data[i]._id === boardId) {
-            targetName = data[i].name;
+    for (let i = 0; i < boards.length; i++) {
+        if (boards[i]._id === boardId) {
+            targetName = boards[i].name;
             break;
         }
     }
@@ -158,7 +167,7 @@ export default function ProjectBoard() {
                         </div>
                         <div className='py-4 ' >
                             {itemtSidebar.map((item) => (
-                                <div className='text-white flex items-center justify-between p-2 hover:bg-sidebarhover cursor-pointer'>
+                                <div className='text-white flex items-center justify-between p-2 hover:bg-sidebarhover cursor-pointer' >
                                     <div className='flex items-center pl-'>
                                         <div className='mr-2 pl-2'>{item.icon}</div>
                                         <p className=' text-sm'>{item.title}</p>

@@ -35,3 +35,11 @@ export interface Task {
   _id?: string;
   title: string;
 }
+export interface LastView{
+  idUser?:string;
+  idBoard?:string;
+}
+export interface BoardLastView{
+  name: string;
+  url:string;
+}

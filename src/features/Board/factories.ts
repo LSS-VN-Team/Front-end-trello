@@ -1,4 +1,4 @@
-import { Board } from "interfaces";
+import { Board, LastView } from "interfaces";
 import { axiosRequest } from "utils/axiosRequest";
 const factories = {
   getBoard: (data: Board) => {
@@ -35,6 +35,12 @@ const factories = {
       method: "get",
       url: `/board/getbyid/${id}`,
     });
-  }
+  },
+  lastviewRequest: (data:LastView) => {
+    return axiosRequest({
+      method: "patch",
+      url:`board/addRecentlyViewed/${data.idUser}/${data.idBoard}`,
+    });
+  },
 };
 export default factories;

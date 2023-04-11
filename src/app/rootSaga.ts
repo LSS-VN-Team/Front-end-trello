@@ -6,6 +6,7 @@ import boardSaga from "features/Board/BoardSaga";
 import UserIdSaga from "features/getuser/usersaga";
 import CardSaga from "features/card/cardSaga";
 import TaskSaga from "features/task/taskSaga";
+import LastViewSaga from "features/getBoardLastView/LastViewSaga";
 
 export default function* rootSaga() {
   yield all([
@@ -15,5 +16,6 @@ export default function* rootSaga() {
     UserIdSaga(),
     CardSaga(),
     TaskSaga(),
+    LastViewSaga(),
   ]);
 }

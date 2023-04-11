@@ -16,9 +16,13 @@ import {
   getBoardsId,
   getBoardsIdSuccess,
   getBoardsIdFailure,
+  lastView,
+  lastViewSuccess,
+  lastViewFailure,
 } from "./BoardSlice";
 import { Board } from "interfaces";
 import factories from "./factories";
+import LastView from "components/pageComponents/home/listBoard/lastView";
 
 function* handleGetBoard() {
   yield takeEvery(getBoards.type, function* (action: PayloadAction<Board>) {
@@ -67,10 +71,22 @@ function* handleRemoveBoard() {
   yield takeEvery(removeBoard.type, function* (action: PayloadAction<string>) {
     try {
       const response: any = yield call(factories.removeBoard, action.payload);
-      alert("xóa thành công")
       yield put(removeBoardSuccess(response.data));
     } catch (error: any) {
       yield put(removeBoardFailure(error.message));
+    }
+  });
+}
+function* handleLastView() {
+  yield takeEvery(lastView.type, function* (action: PayloadAction<any>) {
+    try {
+      const response: any = yield call(
+        factories.lastviewRequest,
+        action.payload
+      );
+      yield put(lastViewSuccess(response.data));
+    } catch (error: any) {
+      yield put(lastViewFailure(error.message));
     }
   });
 }
@@ -80,4 +96,5 @@ export default function* boardSaga() {
   yield fork(handleEditBoard);
   yield fork(handleRemoveBoard);
   yield fork(handleGetBoardId);
+  yield fork(handleLastView);
 }

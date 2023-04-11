@@ -1,6 +1,6 @@
 import Tippy from "@tippyjs/react/headless"
 import { useDispatch, useSelector } from "react-redux"
-import { boardSeleted, getBoards, getBoardsId, selectAllBoards } from "features/Board/BoardSlice"
+import { boardSeleted, getBoards, getBoardsId, lastView, selectAllBoards } from "features/Board/BoardSlice"
 import { useEffect } from "react"
 import { useRef, useState } from "react"
 import { BsThreeDots, BsPerson } from "react-icons/bs"
@@ -80,8 +80,15 @@ export default function AddBoard(props: AddBoardProps) {
         setInputValue("")
         setShowForm(false)
     }
+
     const handlegetboardbyid = (boardId: any) => {
         dispatch(getBoardsId(boardId))
+        const id = localStorage.getItem('_id')
+        const Request = {
+            idUser:id,
+            idBoard: boardId,
+        }
+        dispatch(lastView(Request));
     }
     useEffect(() => {
         dispatch(getBoards());
@@ -89,10 +96,10 @@ export default function AddBoard(props: AddBoardProps) {
     return (
         <div className="flex">
             <div>
-                <div className="flex flex-wrap max-w-4xl" onClick={() => handlegetboardbyid}>
+                <div className="flex flex-wrap max-w-4xl" >
                     {boards.map(board => (
                         <Link to={`board/${board._id}`}>
-                            <div className='mr-2 mb-2 cursor-pointer' >
+                            <div className='mr-2 mb-2 cursor-pointer' onClick={()=>handlegetboardbyid(board._id)}>
                                 <p className='absolute text-white text-base font-bold p-2'>{board.name}</p>
                                 <img className='w-48 h-24 rounded-df cursor-pointer' src="https:images.unsplash.com/photo-1679214523859-c78a0bea016d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8N3x8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" alt="" />
                             </div>
@@ -100,6 +107,7 @@ export default function AddBoard(props: AddBoardProps) {
                     ))}
                     <div className="flex">
                         <Tippy
+                            onClickOutside={() => setShowForm(false)}
                             trigger='click'
                             placement='right'
                             interactive
@@ -190,7 +198,7 @@ export default function AddBoard(props: AddBoardProps) {
                             )}
                         >
                             <div className='mr-3 '>
-                                <div className='w-48 h-24 rounded-sm bg-gray-200 flex items-center cursor-pointer hover:bg-gray-300' onClick={()=> setShowForm(true)}>
+                                <div className='w-48 h-24 rounded-sm bg-gray-200 flex items-center cursor-pointer hover:bg-gray-300' onClick={() => setShowForm(true)}>
                                     <p className='text-center w-full text-sm'>Tạo bảng mới</p>
                                 </div>
                             </div>
